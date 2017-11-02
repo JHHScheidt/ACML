@@ -40,4 +40,19 @@ public class NeuralNet {
             }
         }
     }
+    
+    public void printNet(){
+        System.out.println("Number of layers: " + nodes.size());
+        System.out.println("Number of connection layers: " + edges.size());
+        int numNodes = 0;
+        for(int i = 0; i < nodes.size(); i++){
+            numNodes += nodes.get(i).size();
+        }
+        int numEdges = 0;
+        for(int i = 0; i < edges.size(); i++){
+            numEdges += edges.get(i).size();
+        }
+        System.out.println("Number of nodes: " + numNodes);
+        System.out.println("Number of edges: " + numEdges);
+    }
 }
