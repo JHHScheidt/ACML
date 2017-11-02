@@ -18,7 +18,9 @@ public class Main {
         NeuralNet nn = new NeuralNet(layers, biases, bp);
         nn.printNet();
         nn.printWeights();
-
+        nn.setData(getDataLab1());
+        nn.learn();
+        nn.printWeights();
 
 //        ArrayList<ArrayList<double[]>> data = getData(40);
 //        for(int i = 0; i<data.size(); i++) {
