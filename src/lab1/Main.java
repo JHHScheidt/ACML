@@ -35,7 +35,7 @@ public class Main {
     }
 
     public static ArrayList getDataLab1(){
-        ArrayList data = new ArrayList<ArrayList<double[]>>();
+        ArrayList<ArrayList<double[]>> data = new ArrayList<>();
         ArrayList d1, d2, d3, d4, d5, d6, d7, d8;
         
         d1 = new ArrayList<double[]>();
