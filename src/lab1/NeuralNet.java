@@ -37,7 +37,11 @@ public class NeuralNet {
         for(int i = 0; i < nodes.size() - 1; i++){
             for(int j = 0; j < nodes.get(i).size(); j++){
                 for(int k = 0; k < nodes.get(i+1).size(); k++){
+                    if(k == 0 && bias[i+1]){
+                        
+                    } else {
                     edges.get(i).add(new Edge(nodes.get(i).get(j), nodes.get(i+1).get(k), generator.nextDouble()*2));
+                    }
                 }
             }
         }
@@ -46,10 +50,12 @@ public class NeuralNet {
     public void setAllWeights(double[][] weights){
         if(weights.length != edges.size()){
             System.out.println("NUMBER OF LAYER FROM WEIGTHS INCORRECT WITH LAYER OF EDGES");
+            return;
         }
         for(int i = 0; i < edges.size(); i++){
             if(weights[i].length != edges.get(i).size()){
                 System.out.println("WEIGHTS TO EDGES MISMATCH AT LAYER: " + i);
+                return;
             }
         }
         for(int i = 0; i < edges.size(); i++){
