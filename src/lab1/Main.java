@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         int[] layers = {8,3,8};
-        boolean[] biases = {true, true};
+        boolean[] biases = {true, true, false};
         LearningMethod bp = new Backpropagation();
         NeuralNet nn = new NeuralNet(layers, biases, bp);
         nn.printNet();

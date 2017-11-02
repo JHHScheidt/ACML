@@ -33,10 +33,9 @@ public class NeuralNet {
                 if(bias[i]){
                     vertices.get(i).add(new Vertex(biasConstant));
                 }
-                
-                for(int j = 0; j < layers[i]; j++){
-                    vertices.get(i).add(new Vertex());
-                }
+            }
+            for(int j = 0; j < layers[i]; j++){
+                vertices.get(i).add(new Vertex());
             }
         }
         for(int i = 0; i < vertices.size() - 1; i++){
