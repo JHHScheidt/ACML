@@ -9,6 +9,13 @@ public class Main {
     private static Random generator = new Random(1024);
 
     public static void main(String[] args) {
+
+        int[] layers = {8,3,8};
+        boolean[] biases = {true, true};
+        NeuralNet nn = new NeuralNet(layers, biases);
+
+
+
         ArrayList<ArrayList<double[]>> data = getData(40);
         for(int i = 0; i<data.size(); i++) {
             System.out.println(Arrays.toString(data.get(i).get(0)));
