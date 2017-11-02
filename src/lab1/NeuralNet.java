@@ -14,19 +14,19 @@ import java.util.Random;
  * @author Marciano
  */
 public class NeuralNet {
-    
+
     private ArrayList<ArrayList<Vertex>> vertices;
     private ArrayList<ArrayList<Edge>> edges;
     private static Random generator = new Random(3);
     private final double biasConstant = 1;
     private LearningMethod learner;
     private ArrayList<ArrayList<double[]>> data;
-    
+
     public NeuralNet(int[] layers, boolean[] bias, LearningMethod learner){
         this.vertices = new ArrayList<ArrayList<Vertex>>();
         this.edges = new ArrayList<ArrayList<Edge>>();
         this.learner = learner;
-        
+
         for(int i = 0; i < layers.length; i++){
             vertices.add(new ArrayList<Vertex>());
             if(i != layers.length - 1){
@@ -54,7 +54,7 @@ public class NeuralNet {
             }
         }
     }
-    
+
     public void setAllWeights(double[][] weights){
         if(weights.length != edges.size()){
             System.out.println("NUMBER OF LAYER FROM WEIGTHS INCORRECT WITH LAYER OF EDGES");
@@ -72,7 +72,7 @@ public class NeuralNet {
             }
         }
     }
-    
+
     public void printWeights(){
         for(int i = 0; i < edges.size(); i++){
             System.out.print("The weights for edge layer: " + i + " are ");

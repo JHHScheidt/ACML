@@ -30,7 +30,7 @@ public class Main {
         ArrayList data = new ArrayList<ArrayList<double[]>>();
         for(int i = 0; i<numInstances; i++) {
             int random = (int)Math.floor(generator.nextInt(8));
-            System.out.println(random);
+//            System.out.println(random);
             double[] instance = {0,0,0,0,0,0,0,0};
             instance[random] = 1;
             ArrayList dataPoint = new ArrayList<double[]>();
