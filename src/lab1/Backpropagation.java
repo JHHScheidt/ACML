@@ -48,7 +48,17 @@ public class Backpropagation implements LearningMethod {
             }
 
             //Calculate deltas
-            
+            for(int j = vertices.size()-1; j>=0; j--) {
+                for(int k = 0; k<vertices.get(j).size(); k++) {
+                    if(!vertices.get(j).get(k).getBias()) {
+                        if(j==vertices.size()-1)
+                            vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()-currentData.get(1)[k]);
+                        else {
+                            
+                        }
+                    }
+                }
+            }
         }
 
         return Delta;
