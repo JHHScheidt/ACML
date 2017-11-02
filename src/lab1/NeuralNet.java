@@ -75,38 +75,6 @@ public class NeuralNet {
             }
         }
     }
-    
-    public void printOutputValue(){
-        System.out.println("The current values on the output nodes: ");
-        for (Vertex v : vertices.get(vertices.size()-1)) {
-            System.out.print( v.getValue() +"; ");
-        }
-        System.out.println("");
-    }
-    public void printWeights(){
-        for(int i = 0; i < edges.size(); i++){
-            System.out.print("The weights for edge layer: " + i + " are ");
-            for(int j = 0; j < edges.get(i).size(); j++){
-                System.out.print(edges.get(i).get(j).getWeight() + "; ");
-            }
-            System.out.println("");
-        }
-    }
-    public void printNet(){
-        System.out.println("Number of layers: " + vertices.size());
-        System.out.println("Number of connection layers: " + edges.size());
-        int numVertices = 0;
-        for(int i = 0; i < vertices.size(); i++){
-            numVertices += vertices.get(i).size();
-        }
-        int numEdges = 0;
-        for(int i = 0; i < edges.size(); i++){
-            numEdges += edges.get(i).size();
-        }
-        System.out.println("Number of vertices: " + numVertices);
-        System.out.println("Number of edges: " + numEdges);
-    }
-
     public void setData(ArrayList<ArrayList<double[]>> data) {
         this.data = data;
     }
@@ -140,5 +108,49 @@ public class NeuralNet {
     }
     public double sigmoid(double z) {
         return 1/(1+Math.exp(-z));
+    }
+    public void printCurrentData(){
+        for(int i = 0; i < this.data.size(); i++){
+            System.out.println("This should print the input: ");
+            for(int k = 0; k < this.data.get(i).get(0).length; k++){
+                System.out.print(this.data.get(i).get(0)[k] + "; ");
+            }
+            System.out.println("");
+            System.out.println("This should print the output: ");
+            for(int k = 0; k < this.data.get(i).get(0).length; k++){
+                System.out.print(this.data.get(i).get(0)[k] + "; ");
+            }
+            System.out.println("");
+        }
+    }
+    public void printOutputValue(){
+        System.out.println("The current values on the output nodes: ");
+        for (Vertex v : vertices.get(vertices.size()-1)) {
+            System.out.print( v.getValue() +"; ");
+        }
+        System.out.println("");
+    }
+    public void printWeights(){
+        for(int i = 0; i < edges.size(); i++){
+            System.out.print("The weights for edge layer: " + i + " are ");
+            for(int j = 0; j < edges.get(i).size(); j++){
+                System.out.print(edges.get(i).get(j).getWeight() + "; ");
+            }
+            System.out.println("");
+        }
+    }
+    public void printNet(){
+        System.out.println("Number of layers: " + vertices.size());
+        System.out.println("Number of connection layers: " + edges.size());
+        int numVertices = 0;
+        for(int i = 0; i < vertices.size(); i++){
+            numVertices += vertices.get(i).size();
+        }
+        int numEdges = 0;
+        for(int i = 0; i < edges.size(); i++){
+            numEdges += edges.get(i).size();
+        }
+        System.out.println("Number of vertices: " + numVertices);
+        System.out.println("Number of edges: " + numEdges);
     }
 }
