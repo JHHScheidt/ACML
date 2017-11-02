@@ -24,6 +24,11 @@ public class Backpropagation implements LearningMethod {
     public void learnWeights() {
         double learningRate = 1;
         for(int i = 0; i<10000; i++) {
+            for(int j = 0; j<edges.size(); j++) {
+                for(Edge e : edges.get(j)) {
+                    e.setDelta(0.0);
+                }
+            }
             learningIteration(learningRate);
         }
 
