@@ -28,6 +28,7 @@ public class NeuralNet {
         this.learner = learner;
         
         for(int i = 0; i < layers.length; i++){
+            vertices.add(new ArrayList<Vertex>());
             if(i != layers.length - 1){
                 if(bias[i]){
                     vertices.get(i).add(new Vertex(biasConstant));
@@ -39,6 +40,7 @@ public class NeuralNet {
             }
         }
         for(int i = 0; i < vertices.size() - 1; i++){
+            edges.add(new ArrayList<Edge>());
             for(int j = 0; j < vertices.get(i).size(); j++){
                 for(int k = 0; k < vertices.get(i+1).size(); k++){
                     if(k == 0 && bias[i+1]){
@@ -71,10 +73,11 @@ public class NeuralNet {
     
     public void printWeights(){
         for(int i = 0; i < edges.size(); i++){
-            System.out.println("The weights for the layer: " + i + " are ");
+            System.out.print("The weights for edge layer: " + i + " are ");
             for(int j = 0; j < edges.get(i).size(); j++){
-                System.out.print(edges.get(i).get(j).getWeight());
+                System.out.print(edges.get(i).get(j).getWeight() + "; ");
             }
+            System.out.println("");
         }
     }
     public void printNet(){

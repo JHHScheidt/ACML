@@ -18,11 +18,11 @@ public class Main {
         nn.printWeights();
 
 
-        ArrayList<ArrayList<double[]>> data = getData(40);
-        for(int i = 0; i<data.size(); i++) {
-            System.out.println(Arrays.toString(data.get(i).get(0)));
-            System.out.println(Arrays.toString(data.get(i).get(1)));
-        }
+//        ArrayList<ArrayList<double[]>> data = getData(40);
+//        for(int i = 0; i<data.size(); i++) {
+//            System.out.println(Arrays.toString(data.get(i).get(0)));
+//            System.out.println(Arrays.toString(data.get(i).get(1)));
+//        }
         // write your code here
     }
 
