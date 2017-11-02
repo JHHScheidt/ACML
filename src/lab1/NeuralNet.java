@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class NeuralNet {
     
-    private ArrayList<> nodes;
-    private ArrayList<> edges;
+    private ArrayList<ArrayList<Vertex>> nodes;
+    private ArrayList<ArrayList<Edge>> edges;
     
     public NeuralNet(int[] layers, boolean[] bias){
         this.nodes = new ArrayList<ArrayList<Vertex>>();
