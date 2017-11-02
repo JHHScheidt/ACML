@@ -23,7 +23,9 @@ public class Edge {
     public void setWeight(double w){
         this.w = w;
     }
-    
+    public double getWeight(){
+        return this.w;
+    }
     public Vertex getVertexInput(){
         return this.input;
     }
