@@ -10,12 +10,15 @@ public class Vertex {
     private boolean biased = false;
 
     public Vertex(){
-        
+        this.inputEdges = new ArrayList<Edge>();
+        this.outputEdges = new ArrayList<Edge>();
     }
     
     public Vertex( double value, boolean biased ) {
         this.value=value;
         this.biased = biased;
+        this.inputEdges = new ArrayList<Edge>();
+        this.outputEdges = new ArrayList<Edge>();
     }
 
     public void addInputEdge( Edge e ) {
