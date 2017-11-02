@@ -31,11 +31,6 @@ public class NeuralNet {
                     nodes.get(i).add(new Vertex());
                 }
             }
-            else{
-                for(int j = 0; j < layers[i]; j++){
-                    nodes.get(i).add(new Vertex());
-                }
-            }
         }
         for(int i = 0; i < nodes.size() - 1; i++){
             for(int j = 0; j < nodes.get(i).size(); j++){
