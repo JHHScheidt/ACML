@@ -13,6 +13,7 @@ public class Edge {
     
     private Vertex input, output;
     private double w;
+    private double Delta = 0;
     
     public Edge(Vertex input, Vertex output, double w){
         this.input = input;
@@ -20,8 +21,14 @@ public class Edge {
         this.w = w;
     }
     
+    public void setDelta(double Delta){
+        this.Delta = Delta;
+    }
     public void setWeight(double w){
         this.w = w;
+    }
+    public double getDelta(){
+        return this.Delta;
     }
     public double getWeight(){
         return this.w;
