@@ -14,7 +14,8 @@ public class Main {
         boolean[] biases = {true, true};
         LearningMethod bp = new Backpropagation();
         NeuralNet nn = new NeuralNet(layers, biases, bp);
-
+        nn.printNet();
+        nn.printWeights();
 
 
         ArrayList<ArrayList<double[]>> data = getData(40);
