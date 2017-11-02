@@ -43,7 +43,7 @@ public class Backpropagation implements LearningMethod {
             System.out.println(Arrays.toString(currentData.get(0)));
             //Set first layer values CORRECT
             for(int j = currentData.get(0).length-1; j>=0; j--) {
-                vertices.get(0).get(vertices.get(0).size()-1-j).setValue(currentData.get(0)[j]);
+                vertices.get(0).get(vertices.get(0).size()-1-j).setValue(currentData.get(0)[currentData.get(0).length-1-j]);
             }
 
             //Perform forward propagation
