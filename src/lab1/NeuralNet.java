@@ -40,7 +40,7 @@ public class NeuralNet {
                     if(k == 0 && bias[i+1]){
                         
                     } else {
-                    edges.get(i).add(new Edge(nodes.get(i).get(j), nodes.get(i+1).get(k), generator.nextDouble()*2));
+                        edges.get(i).add(new Edge(nodes.get(i).get(j), nodes.get(i+1).get(k), generator.nextDouble()*2));
                     }
                 }
             }
