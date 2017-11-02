@@ -23,7 +23,7 @@ public class NeuralNet {
         this.edges = new ArrayList<ArrayList<Edge>>();
         
         for(int i = 0; i < layers.length; i++){
-            if(i != layers.length){
+            if(i != layers.length - 1){
                 if(bias[i]){
                     nodes.get(i).add(new Vertex(1));
                 }
