@@ -1,6 +1,7 @@
 package lab1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Backpropagation implements LearningMethod {
 
@@ -32,8 +33,8 @@ public class Backpropagation implements LearningMethod {
         for(int i = 0; i<data.size(); i++) {
             ArrayList<double[]> currentData = data.get(i);
             //Set first layer values
-            for(int j = 0; i<vertices.get(1).size(); j++) {
-                vertices.get(1).get(j).setValue(currentData.get(0)[j]);
+            for(int j = currentData.size()-1; j>=0; j--) {
+                vertices.get(0).get(j).setValue(currentData.get(0)[j]);
             }
             //Perform forward propagation
             for(int j = 1; j<vertices.size(); j++) {
