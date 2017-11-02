@@ -48,9 +48,8 @@ public class Backpropagation implements LearningMethod {
             for(int j = 1; j<vertices.size(); j++) {
                 for(int k = 0; k<vertices.get(j).size(); k++) {
                     if(!vertices.get(j).get(k).getBias()) {
-                        ArrayList<Edge> curEdges = vertices.get(j).get(k).getInputEdges();
                         double z = 0;
-                        for(Edge e :  curEdges) {
+                        for(Edge e :  vertices.get(j).get(k).getInputEdges()) {
                             z += e.getWeight()*e.getVertexInput().getValue();
                         }
                         vertices.get(j).get(k).setValue(sigmoid(z));

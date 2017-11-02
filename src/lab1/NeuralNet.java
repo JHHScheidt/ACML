@@ -128,7 +128,7 @@ public class NeuralNet {
                 for(Edge e : vertices.get(i).get(j).getInputEdges()) {
                     vertexValue += e.getWeight()*e.getVertexInput().getValue();
                 }
-                vertices.get(i).get(j).setValue(vertexValue);
+                vertices.get(i).get(j).setValue(sigmoid(vertexValue));
             }
         }
         double[] result = {0,0,0,0,0,0,0,0};
@@ -137,5 +137,8 @@ public class NeuralNet {
         }
         System.out.println("Predicted result: " + Arrays.toString(result));
         return result;
+    }
+    public double sigmoid(double z) {
+        return 1/(1+Math.exp(-z));
     }
 }
