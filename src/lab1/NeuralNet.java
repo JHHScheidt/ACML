@@ -31,7 +31,7 @@ public class NeuralNet {
             vertices.add(new ArrayList<Vertex>());
             if(i != layers.length - 1){
                 if(bias[i]){
-                    vertices.get(i).add(new Vertex(biasConstant));
+                    vertices.get(i).add(new Vertex(biasConstant, true));
                 }
             }
             for(int j = 0; j < layers[i]; j++){
@@ -45,7 +45,10 @@ public class NeuralNet {
                     if(k == 0 && bias[i+1]){
 
                     } else {
-                    edges.get(i).add(new Edge(vertices.get(i).get(j), vertices.get(i+1).get(k), generator.nextDouble()*2));
+                        Edge temp = new Edge(vertices.get(i).get(j), vertices.get(i+1).get(k), generator.nextDouble()*2);
+                        edges.get(i).add(temp);
+                        vertices.get(i).get(j).addOutputEdge(temp);
+                        vertices.get(i+1).get(k).addInputEdge(temp);
                     }
                 }
             }
