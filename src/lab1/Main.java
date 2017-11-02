@@ -19,11 +19,12 @@ public class Main {
         nn.printNet();
         nn.printWeights();
         nn.setData(getDataLab1());
-        for(int i = 0; i < 10000; i++){
-            nn.learn();
-        }
+        nn.learn();
         nn.printWeights();
         nn.printOutputValue();
+
+        double[] test = {0,0,0,0,0,0,0,1};
+        nn.predict(test);
 
 //        ArrayList<ArrayList<double[]>> data = getData(40);
 //        for(int i = 0; i<data.size(); i++) {

@@ -7,6 +7,7 @@ package lab1;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -21,11 +22,13 @@ public class NeuralNet {
     private final double biasConstant = 1;
     private LearningMethod learner;
     private ArrayList<ArrayList<double[]>> data;
+    private boolean[] bias;
 
     public NeuralNet(int[] layers, boolean[] bias, LearningMethod learner){
         this.vertices = new ArrayList<ArrayList<Vertex>>();
         this.edges = new ArrayList<ArrayList<Edge>>();
         this.learner = learner;
+        this.bias = bias;
 
         for(int i = 0; i < layers.length; i++){
             vertices.add(new ArrayList<Vertex>());
@@ -78,6 +81,7 @@ public class NeuralNet {
         for (Vertex v : vertices.get(vertices.size()-1)) {
             System.out.print( v.getValue() +"; ");
         }
+        System.out.println("");
     }
     public void printWeights(){
         for(int i = 0; i < edges.size(); i++){
@@ -110,5 +114,28 @@ public class NeuralNet {
     public void learn() {
         learner.setData(this.data, this.edges, this.vertices);
         learner.learnWeights();
+    }
+
+    public double[] predict(double[] input) {
+        System.out.println("Predicting using input:" + Arrays.toString(input));
+        //Set first layer values
+        for(int j = input.length-1; j>0; j--) {
+            vertices.get(0).get(vertices.get(0).size()-1-j).setValue(input[j]);
+        }
+        for(int i = 1; i < vertices.size() ; i++) {
+            for(int j = ((this.bias[i]?1:0)); j<vertices.get(i).size(); j++) {
+                double vertexValue = 0.0;
+                for(Edge e : vertices.get(i).get(j).getInputEdges()) {
+                    vertexValue += e.getWeight()*e.getVertexInput().getValue();
+                }
+                vertices.get(i).get(j).setValue(vertexValue);
+            }
+        }
+        double[] result = {0,0,0,0,0,0,0,0};
+        for(int i = 0; i<vertices.get(vertices.size()-1).size(); i++) {
+            result[i] = vertices.get(vertices.size()-1).get(i).getValue();
+        }
+        System.out.println("Predicted result: " + Arrays.toString(result));
+        return result;
     }
 }

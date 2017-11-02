@@ -23,7 +23,10 @@ public class Backpropagation implements LearningMethod {
     @Override
     public void learnWeights() {
         double learningRate = 1;
-        learningIteration(learningRate);
+        for(int i = 0; i<10000; i++) {
+            learningIteration(learningRate);
+        }
+
 
     }
 
