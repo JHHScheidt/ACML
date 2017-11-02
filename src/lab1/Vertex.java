@@ -6,6 +6,10 @@ public class Vertex {
     private Edge outputEdge;
     private double delta;
 
+    public Vertex(){
+        
+    }
+    
     public Vertex( double value ) {
         this.value=value;
     }
