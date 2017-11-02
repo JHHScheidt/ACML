@@ -21,10 +21,12 @@ public class Backpropagation implements LearningMethod {
 
     @Override
     public void learnWeights() {
+        double learningRate = 1;
+        learningIteration(learningRate);
 
     }
 
-    public ArrayList<ArrayList<Double>> learningIteration() {
+    public void learningIteration(double learningRate) {
         ArrayList<ArrayList<Double>> Delta = new ArrayList<>();
 
         for(int i = 0; i<data.size(); i++) {
@@ -48,20 +50,36 @@ public class Backpropagation implements LearningMethod {
             }
 
             //Calculate deltas
-            for(int j = vertices.size()-1; j>=0; j--) {
+            for(int j = vertices.size()-1; j>0; j--) {
                 for(int k = 0; k<vertices.get(j).size(); k++) {
                     if(!vertices.get(j).get(k).getBias()) {
                         if(j==vertices.size()-1)
                             vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()-currentData.get(1)[k]);
                         else {
-                            
+                            double errorWeightSum = 0;
+                            for(Edge e : vertices.get(j).get(k).getOutputEdges()) {
+                                errorWeightSum += e.getWeight() * e.getVertexOutput().getValue();
+                            }
+                            vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()*(1-vertices.get(j).get(k).getValue())*errorWeightSum);
                         }
                     }
                 }
             }
-        }
 
-        return Delta;
+            //Calculate Delta
+            for(int j = 0; j<edges.size();j++) {
+                for(Edge e : edges.get(j)) {
+                    e.setDelta(e.getDelta()+e.getVertexInput().getValue()*e.getVertexOutput().getDelta());
+                }
+            }
+        }
+        //Update weights
+        double lambda = 1;
+        for(int j = 0; j<edges.size();j++) {
+            for(Edge e : edges.get(j)) {
+                e.setWeight(e.getWeight()-learningRate/data.size()*(e.getDelta()+lambda*e.getWeight()));
+            }
+        }
     }
 
     public double sigmoid(double z) {
