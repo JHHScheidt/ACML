@@ -72,7 +72,13 @@ public class NeuralNet {
             }
         }
     }
-
+    
+    public void printOutputValue(){
+        System.out.println("The current values on the output nodes: ");
+        for (Vertex v : vertices.get(vertices.size()-1)) {
+            System.out.print( v.getValue() +"; ");
+        }
+    }
     public void printWeights(){
         for(int i = 0; i < edges.size(); i++){
             System.out.print("The weights for edge layer: " + i + " are ");
