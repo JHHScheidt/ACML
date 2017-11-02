@@ -12,7 +12,8 @@ public class Main {
 
         int[] layers = {8,3,8};
         boolean[] biases = {true, true};
-        NeuralNet nn = new NeuralNet(layers, biases);
+        LearningMethod bp = new Backpropagation();
+        NeuralNet nn = new NeuralNet(layers, biases, bp);
 
 
 
