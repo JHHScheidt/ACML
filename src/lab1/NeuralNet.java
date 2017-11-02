@@ -42,7 +42,7 @@ public class NeuralNet {
             for(int j = 0; j < vertices.get(i).size(); j++){
                 for(int k = 0; k < vertices.get(i+1).size(); k++){
                     if(k == 0 && bias[i+1]){
-                        
+
                     } else {
                     edges.get(i).add(new Edge(vertices.get(i).get(j), vertices.get(i+1).get(k), generator.nextDouble()*2));
                     }
@@ -98,5 +98,6 @@ public class NeuralNet {
 
     public void learn() {
         learner.setData(this.data, this.edges, this.vertices);
+        learner.learnWeights();
     }
 }
