@@ -12,14 +12,14 @@ public class Main {
 
         int[] layers = {8,3,8};
         boolean[] biases = {true, true, false};
-        double learningRate = 1;
-        int iterations = 1;
+        double learningRate;
+        int iterations;
         LearningMethod bp = new Backpropagation();
-        int j = 2000;
-        while(j <= 10000){
+        for(int j = 1; j <= 10; j += 1){
             iterations = j;
+            learningRate = 1;
             for(int i = 1; i < 11; i++){
-                learningRate = learningRate*0.1*i;
+                learningRate = 0.1*i;
                 NeuralNet nn = new NeuralNet(layers, biases, bp);
                 nn.setData(getDataLab1());
                 nn.learn(learningRate, iterations);
@@ -31,7 +31,6 @@ public class Main {
                 System.out.print(accuError + "; ");
                 
             }
-            j += 1000;
             System.out.println("");
         }
 //        int[] layers = {1,6,5,4,3,2,1};
