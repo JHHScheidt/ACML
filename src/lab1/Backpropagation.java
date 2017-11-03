@@ -3,12 +3,37 @@ package lab1;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * A learning method which implements the interface: LearningMethod.
+ *
+ * @see lab1.LearningMethod
+ * @author Marciano Geijeselaers
+ * @author Joshua Scheidt
+ */
 public class Backpropagation implements LearningMethod {
 
+    /**
+     * The list of data objects.
+     * The first arraylist are the different datapoints.
+     * The second arraylist is always a list of size 2; the input node and the output node
+     */
     ArrayList<ArrayList<double[]>> data;
+    /**
+     * The list of edges.
+     * The first arraylist represents the layers between the vertex layers (meaning edges.size = vertives.size-1).
+     * The second arraylist represents a list of edges for some layer i.
+     */
     ArrayList<ArrayList<Edge>> edges;
+    /**
+     * The list of vertices.
+     * The first arraylist represents the layers of the neural network.
+     * The second arraylist represents a list of Vertices of some layer i.
+     */
     ArrayList<ArrayList<Vertex>> vertices;
 
+    /**
+     * Creates a new Backpropagation weight learning class.
+     */
     public Backpropagation() {
 
     }
@@ -35,6 +60,11 @@ public class Backpropagation implements LearningMethod {
 
     }
 
+    /**
+     * A single learning iteration over all the datapoints from the testing data.
+     *
+     * @param learningRate The learning rate alpha used when changing the current weights
+     */
     public void learningIteration(double learningRate) {
         ArrayList<ArrayList<Double>> Delta = new ArrayList<>();
 
@@ -46,7 +76,7 @@ public class Backpropagation implements LearningMethod {
                 vertices.get(0).get(vertices.get(0).size()-1-j).setValue(currentData.get(0)[currentData.get(0).length-1-j]);
             }
 
-            //Perform forward propagation
+            //Perform forward propagation CORRECT
             for(int j = 1; j<vertices.size(); j++) {
                 for(int k = 0; k<vertices.get(j).size(); k++) {
                     if(!vertices.get(j).get(k).getBias()) {
