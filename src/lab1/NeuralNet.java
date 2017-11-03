@@ -124,7 +124,7 @@ public class NeuralNet {
      * @return The output for the prediction
      */
     public double[] predict(double[] input) {
-        System.out.println("Predicting using input:" + Arrays.toString(input));
+        System.out.println("Predicting using input: " + Arrays.toString(input));
         //Set first layer values
         for(int j = input.length-1; j>0; j--) {
             vertices.get(0).get(vertices.get(0).size()-1-j).setValue(input[j]);
@@ -138,6 +138,13 @@ public class NeuralNet {
                 vertices.get(i).get(j).setValue(sigmoid(vertexValue));
             }
         }
+        
+        System.out.print("Predicting using input ");
+        for(int i = 0; i < vertices.get(0).size()-1; i++){
+            System.out.print(vertices.get(0).get(i).getValue() +"; ");
+        }
+        System.out.println("");
+        
         double[] result = {0,0,0,0,0,0,0,0};
         for(int i = 0; i<vertices.get(vertices.size()-1).size(); i++) {
             result[i] = vertices.get(vertices.size()-1).get(i).getValue();
