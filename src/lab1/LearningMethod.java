@@ -22,6 +22,6 @@ public interface LearningMethod {
     /**
      * Learns the weights of the neural network.
      */
-    void learnWeights();
+    void learnWeights(double learningRate, int iterations);
 
 }

@@ -112,9 +112,9 @@ public class NeuralNet {
     /**
      * Starts the learning process for the weights.
      */
-    public void learn() {
+    public void learn(double learningRate, int iterations) {
         learner.setData(this.data, this.edges, this.vertices);
-        learner.learnWeights();
+        learner.learnWeights(learningRate, iterations);
     }
     /**
      * This method calculates the accumulated error for each of the entered data points

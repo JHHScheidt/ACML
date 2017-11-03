@@ -12,6 +12,8 @@ public class Main {
 
         int[] layers = {8,3,8};
         boolean[] biases = {true, true, false};
+        double learningRate = 1;
+        int iterations = 1000;
 //        int[] layers = {1,6,5,4,3,2,1};
 //        boolean[] biases = {false,false,false,false,false,false,false};
         LearningMethod bp = new Backpropagation();
@@ -20,14 +22,14 @@ public class Main {
         nn.printWeights();
         nn.setData(getDataLab1());
 //        nn.setData(getOtherData());
-        nn.learn();
+        nn.learn(learningRate, iterations);
         nn.printWeights();
         nn.printOutputValue();
 
-//        double[] test = {1,1,1,1,1,1,1,2};
-        double[] test = {0,0,0,0,0,0,0,1};
-        nn.predict(test);
-
+//        double[] test = {0,0,0,0,0,0,0,1};
+//        nn.predict(test);
+        double[] errors = nn.validation(getDataLab1());
+        System.out.println(Arrays.toString(errors));
 //        ArrayList<ArrayList<double[]>> data = getData(40);
 //        for(int i = 0; i<data.size(); i++) {
 //            System.out.println(Arrays.toString(data.get(i).get(0)));
