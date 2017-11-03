@@ -126,8 +126,8 @@ public class NeuralNet {
     public double[] predict(double[] input) {
         System.out.println("Predicting using input: " + Arrays.toString(input));
         //Set first layer values
-        for(int j = ((this.bias[0]?1:0)); j<vertices.get(0).size(); j++) {
-            vertices.get(0).get(j).setValue(input[j]);
+        for(int j = 0; j<input.length; j++) {
+            vertices.get(0).get(((this.bias[0]?1:0))+j).setValue(input[j]);
         }
         for(int i = 1; i < vertices.size() ; i++) {
             for(int j = ((this.bias[i]?1:0)); j<vertices.get(i).size(); j++) {
