@@ -64,7 +64,7 @@ public class NeuralNet {
             edges.add(new ArrayList<Edge>());
             for(int j = 0; j < vertices.get(i).size(); j++){
                 for(int k = 0; k < vertices.get(i+1).size(); k++){
-                    if(k == 0 && bias[i+1]){
+                    if(vertices.get(i+1).get(k).getBias()){
 
                     } else {
                         Edge temp = new Edge(vertices.get(i).get(j), vertices.get(i+1).get(k), generator.nextDouble()*2);
