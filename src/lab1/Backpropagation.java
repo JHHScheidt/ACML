@@ -66,72 +66,72 @@ public class Backpropagation implements LearningMethod {
      * @param learningRate The learning rate alpha used when changing the current weights
      */
     public void learningIteration(double learningRate) {
-//        ArrayList<ArrayList<Double>> Delta = new ArrayList<>();
 
         for(int i = 0; i<data.size(); i++) {
             ArrayList<double[]> currentData = data.get(i);
-// System.out.println(Arrays.toString(currentData.get(0)));
-            //Set first layer values CORRECT
+
+            //Set first layer values
             for(int j = 0; j<currentData.get(0).length; j++) {
                 vertices.get(0).get((vertices.get(0).get(0).getBias()?1:0)+j).setValue(currentData.get(0)[j]);
             }
 
-            //Perform forward propagation CORRECT
-            for(int j = 1; j<vertices.size(); j++) {
-                for(int k = 0; k<vertices.get(j).size(); k++) {
-                    if(!vertices.get(j).get(k).getBias()) {
-                        double z = 0;
-//                        System.out.println("Layer: "+j+"   Vertex: "+k);
-                        for(Edge e :  vertices.get(j).get(k).getInputEdges()) {
-//                            System.out.println("edge weight: "+e.getWeight()+"   Vertex value: "+e.getVertexInput().getValue());
-                            z += e.getWeight()*e.getVertexInput().getValue();
-                        }
-//                        System.out.println("z: "+z);
-                        vertices.get(j).get(k).setValue(sigmoid(z));
-//                        System.out.println("Sigmoid: "+sigmoid(z));
-                    }
-                }
-            }
+            feedForward();
 
-            //Calculate deltas
-            for(int j = vertices.size()-1; j>0; j--) {
-                for(int k = 0; k<vertices.get(j).size(); k++) {
-                    if(j==vertices.size()-1)
-                        vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()-currentData.get(1)[k]);
-                    else {
-                        double errorWeightSum = 0;
-                        for(Edge e : vertices.get(j).get(k).getOutputEdges()) {
-                            errorWeightSum += e.getWeight() * e.getVertexOutput().getDelta();
-                        }
-                        vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()*(1-vertices.get(j).get(k).getValue())*errorWeightSum);
-                    }
-                }
-            }
-//
-//            //Calculate Delta
-//            for(int j = 0; j<edges.size();j++) {
-//                for(Edge e : edges.get(j)) {
-//                    e.setDelta(e.getDelta()+e.getVertexInput().getValue()*e.getVertexOutput().getDelta());
-//                }
-//            }
-            double lambda = 1;
+            backwardPropagation(currentData.get(1));
+
+            //Update weights
             for(int j = 0; j<edges.size();j++) {
                 for(Edge e : edges.get(j)) {
-//                e.setWeight(e.getWeight()+learningRate/data.size()*(e.getDelta()+lambda*e.getWeight()));
                     e.setWeight(e.getWeight()-learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
                 }
             }
         }
-//        //Update weights
-//        double lambda = 1;
-//        for(int j = 0; j<edges.size();j++) {
-//            for(Edge e : edges.get(j)) {
-////                e.setWeight(e.getWeight()+learningRate/data.size()*(e.getDelta()+lambda*e.getWeight()));
-//                e.setWeight(e.getWeight()+learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
-//            }
-//        }
     }
 
+    /**
+     * Performs the forward propagation of the neural network.
+     */
+    public void feedForward() {
+        //Perform forward propagation CORRECT
+        for(int j = 1; j<vertices.size(); j++) {
+            for(int k = 0; k<vertices.get(j).size(); k++) {
+                if(!vertices.get(j).get(k).getBias()) {
+                    double z = 0;
+                    for(Edge e :  vertices.get(j).get(k).getInputEdges()) {
+                        z += e.getWeight()*e.getVertexInput().getValue();
+                    }
+                    vertices.get(j).get(k).setValue(sigmoid(z));
+                }
+            }
+        }
+    }
+
+    /**
+     * Calculates the delta values according to the backward propagation algorithm.
+     */
+    public void backwardPropagation(double[] output) {
+        //Calculate deltas
+        for(int j = vertices.size()-1; j>0; j--) {
+            for(int k = 0; k<vertices.get(j).size(); k++) {
+                if(j==vertices.size()-1)
+                    vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()-output[k]);
+                else {
+                    double errorWeightSum = 0;
+                    for(Edge e : vertices.get(j).get(k).getOutputEdges()) {
+                        errorWeightSum += e.getWeight() * e.getVertexOutput().getDelta();
+                    }
+                    vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()*(1-vertices.get(j).get(k).getValue())*errorWeightSum);
+                }
+            }
+        }
+    }
+
+    /**
+     * Performs a sigmoid function step.
+     *
+     * @param z Value to be filled in into sigmoid
+     * @return The result from the sigmoid function
+     */
     public double sigmoid(double z) {
         return 1/(1+Math.exp(-z));
     }
