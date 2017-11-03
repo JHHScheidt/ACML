@@ -142,6 +142,7 @@ public class NeuralNet {
         for(int i = 0; i<vertices.get(vertices.size()-1).size(); i++) {
             result[i] = vertices.get(vertices.size()-1).get(i).getValue();
         }
+
         System.out.println("Predicted result: " + Arrays.toString(result));
         return result;
     }

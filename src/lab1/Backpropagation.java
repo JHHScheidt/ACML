@@ -48,7 +48,7 @@ public class Backpropagation implements LearningMethod {
     @Override
     public void learnWeights() {
         double learningRate = 1;
-        for(int i = 0; i<10000; i++) {
+        for(int i = 0; i<1; i++) {
             for(int j = 0; j<edges.size(); j++) {
                 for(Edge e : edges.get(j)) {
                     e.setDelta(0.0);
@@ -61,19 +61,19 @@ public class Backpropagation implements LearningMethod {
     }
 
     /**
-     * A single learning iteration over all the datapoints from the testing data.
+     * A single learning iteration over all the data points from the testing data.
      *
      * @param learningRate The learning rate alpha used when changing the current weights
      */
     public void learningIteration(double learningRate) {
-        ArrayList<ArrayList<Double>> Delta = new ArrayList<>();
+//        ArrayList<ArrayList<Double>> Delta = new ArrayList<>();
 
         for(int i = 0; i<data.size(); i++) {
             ArrayList<double[]> currentData = data.get(i);
 // System.out.println(Arrays.toString(currentData.get(0)));
             //Set first layer values CORRECT
-            for(int j = currentData.get(0).length-1; j>=0; j--) {
-                vertices.get(0).get(vertices.get(0).size()-1-j).setValue(currentData.get(0)[currentData.get(0).length-1-j]);
+            for(int j = 0; j<currentData.get(0).length; j++) {
+                vertices.get(0).get((vertices.get(0).get(0).getBias()?1:0)+j).setValue(currentData.get(0)[j]);
             }
 
             //Perform forward propagation CORRECT
@@ -81,10 +81,15 @@ public class Backpropagation implements LearningMethod {
                 for(int k = 0; k<vertices.get(j).size(); k++) {
                     if(!vertices.get(j).get(k).getBias()) {
                         double z = 0;
+                        System.out.println("Layer: "+j+"   Vertex: "+k);
                         for(Edge e :  vertices.get(j).get(k).getInputEdges()) {
+                            System.out.println("edge weight: "+e.getWeight()+"   Vertex value: "+e.getVertexInput().getValue());
                             z += e.getWeight()*e.getVertexInput().getValue();
                         }
+                        System.out.println("z: "+z);
                         vertices.get(j).get(k).setValue(sigmoid(z));
+                        System.out.println("Sigmoid: "+sigmoid(z));
+                        break;
                     }
                 }
             }
@@ -98,7 +103,7 @@ public class Backpropagation implements LearningMethod {
                         else {
                             double errorWeightSum = 0;
                             for(Edge e : vertices.get(j).get(k).getOutputEdges()) {
-                                errorWeightSum += e.getWeight() * e.getVertexOutput().getValue();
+                                errorWeightSum += e.getWeight() * e.getVertexOutput().getDelta();
                             }
                             vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()*(1-vertices.get(j).get(k).getValue())*errorWeightSum);
                         }
@@ -119,7 +124,6 @@ public class Backpropagation implements LearningMethod {
             for(Edge e : edges.get(j)) {
 //                e.setWeight(e.getWeight()+learningRate/data.size()*(e.getDelta()+lambda*e.getWeight()));
                 e.setWeight(e.getWeight()+learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
-
             }
         }
     }
