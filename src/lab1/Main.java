@@ -18,18 +18,18 @@ public class Main {
 //        boolean[] biases = {false,false,false,false,false,false,false};
         LearningMethod bp = new Backpropagation();
         NeuralNet nn = new NeuralNet(layers, biases, bp);
-        nn.printNet();
-        nn.printWeights();
+//        nn.printNet();
+//        nn.printWeights();
         nn.setData(getDataLab1());
 //        nn.setData(getOtherData());
         nn.learn(learningRate, iterations);
-        nn.printWeights();
-        nn.printOutputValue();
+//        nn.printWeights();
+//        nn.printOutputValue();
 
 //        double[] test = {0,0,0,0,0,0,0,1};
 //        nn.predict(test);
         double[] errors = nn.validation(getDataLab1());
-        System.out.println(Arrays.toString(errors));
+//        System.out.println(Arrays.toString(errors));
 //        ArrayList<ArrayList<double[]>> data = getData(40);
 //        for(int i = 0; i<data.size(); i++) {
 //            System.out.println(Arrays.toString(data.get(i).get(0)));
