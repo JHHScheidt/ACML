@@ -48,7 +48,7 @@ public class Backpropagation implements LearningMethod {
     @Override
     public void learnWeights() {
         double learningRate = 1;
-        for(int i = 0; i<1000; i++) {
+        for(int i = 0; i<10000; i++) {
             for(int j = 0; j<edges.size(); j++) {
                 for(Edge e : edges.get(j)) {
                     e.setDelta(0.0);
@@ -96,16 +96,14 @@ public class Backpropagation implements LearningMethod {
             //Calculate deltas
             for(int j = vertices.size()-1; j>0; j--) {
                 for(int k = 0; k<vertices.get(j).size(); k++) {
-                    if(!vertices.get(j).get(k).getBias()) {
-                        if(j==vertices.size()-1)
-                            vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()-currentData.get(1)[k]);
-                        else {
-                            double errorWeightSum = 0;
-                            for(Edge e : vertices.get(j).get(k).getOutputEdges()) {
-                                errorWeightSum += e.getWeight() * e.getVertexOutput().getDelta();
-                            }
-                            vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()*(1-vertices.get(j).get(k).getValue())*errorWeightSum);
+                    if(j==vertices.size()-1)
+                        vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()-currentData.get(1)[k]);
+                    else {
+                        double errorWeightSum = 0;
+                        for(Edge e : vertices.get(j).get(k).getOutputEdges()) {
+                            errorWeightSum += e.getWeight() * e.getVertexOutput().getDelta();
                         }
+                        vertices.get(j).get(k).setDelta(vertices.get(j).get(k).getValue()*(1-vertices.get(j).get(k).getValue())*errorWeightSum);
                     }
                 }
             }
@@ -120,7 +118,7 @@ public class Backpropagation implements LearningMethod {
             for(int j = 0; j<edges.size();j++) {
                 for(Edge e : edges.get(j)) {
 //                e.setWeight(e.getWeight()+learningRate/data.size()*(e.getDelta()+lambda*e.getWeight()));
-                    e.setWeight(e.getWeight()+learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
+                    e.setWeight(e.getWeight()-learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
                 }
             }
         }
