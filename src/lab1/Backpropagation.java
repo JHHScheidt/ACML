@@ -48,7 +48,7 @@ public class Backpropagation implements LearningMethod {
     @Override
     public void learnWeights() {
         double learningRate = 1;
-        for(int i = 0; i<1; i++) {
+        for(int i = 0; i<1000; i++) {
             for(int j = 0; j<edges.size(); j++) {
                 for(Edge e : edges.get(j)) {
                     e.setDelta(0.0);
@@ -81,15 +81,14 @@ public class Backpropagation implements LearningMethod {
                 for(int k = 0; k<vertices.get(j).size(); k++) {
                     if(!vertices.get(j).get(k).getBias()) {
                         double z = 0;
-                        System.out.println("Layer: "+j+"   Vertex: "+k);
+//                        System.out.println("Layer: "+j+"   Vertex: "+k);
                         for(Edge e :  vertices.get(j).get(k).getInputEdges()) {
-                            System.out.println("edge weight: "+e.getWeight()+"   Vertex value: "+e.getVertexInput().getValue());
+//                            System.out.println("edge weight: "+e.getWeight()+"   Vertex value: "+e.getVertexInput().getValue());
                             z += e.getWeight()*e.getVertexInput().getValue();
                         }
-                        System.out.println("z: "+z);
+//                        System.out.println("z: "+z);
                         vertices.get(j).get(k).setValue(sigmoid(z));
-                        System.out.println("Sigmoid: "+sigmoid(z));
-                        break;
+//                        System.out.println("Sigmoid: "+sigmoid(z));
                     }
                 }
             }
@@ -110,22 +109,29 @@ public class Backpropagation implements LearningMethod {
                     }
                 }
             }
-
+//
 //            //Calculate Delta
 //            for(int j = 0; j<edges.size();j++) {
 //                for(Edge e : edges.get(j)) {
 //                    e.setDelta(e.getDelta()+e.getVertexInput().getValue()*e.getVertexOutput().getDelta());
 //                }
 //            }
-        }
-        //Update weights
-        double lambda = 1;
-        for(int j = 0; j<edges.size();j++) {
-            for(Edge e : edges.get(j)) {
+            double lambda = 1;
+            for(int j = 0; j<edges.size();j++) {
+                for(Edge e : edges.get(j)) {
 //                e.setWeight(e.getWeight()+learningRate/data.size()*(e.getDelta()+lambda*e.getWeight()));
-                e.setWeight(e.getWeight()+learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
+                    e.setWeight(e.getWeight()+learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
+                }
             }
         }
+//        //Update weights
+//        double lambda = 1;
+//        for(int j = 0; j<edges.size();j++) {
+//            for(Edge e : edges.get(j)) {
+////                e.setWeight(e.getWeight()+learningRate/data.size()*(e.getDelta()+lambda*e.getWeight()));
+//                e.setWeight(e.getWeight()+learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
+//            }
+//        }
     }
 
     public double sigmoid(double z) {
