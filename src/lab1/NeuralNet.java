@@ -116,7 +116,22 @@ public class NeuralNet {
         learner.setData(this.data, this.edges, this.vertices);
         learner.learnWeights();
     }
-
+    /**
+     * This method calculates the accumulated error for each of the entered data points
+     * This has the same structure as the training set
+     * @param data The validation data
+     * @return Returns a double[] with the accumulated error for each validation instance
+     */
+    public double[] validation(ArrayList<ArrayList<double[]>> data){
+        double accuError[] = new double[data.get(0).get(1).length];
+        for(int i = 0; i < data.size(); i++){
+            double[] result = this.predict(data.get(i).get(0));
+            for(int j = 0; j < result.length; j++){
+                accuError[i] += Math.abs(result[j] - data.get(i).get(1)[j]);
+            }
+        }
+        return accuError;
+    }
     /**
      * Predicts an output using the current weights of the neural network.
      *
