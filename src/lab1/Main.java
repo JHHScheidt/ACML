@@ -13,23 +13,42 @@ public class Main {
         int[] layers = {8,3,8};
         boolean[] biases = {true, true, false};
         double learningRate = 1;
-        int iterations = 1000;
+        int iterations = 1;
+        LearningMethod bp = new Backpropagation();
+        int j = 1;
+        while(j <= 10){
+            for(int i = 1; i < 10; i++){
+                learningRate = learningRate*0.1*i;
+                NeuralNet nn = new NeuralNet(layers, biases, bp);
+                nn.setData(getDataLab1());
+                nn.learn(learningRate, iterations);
+                double[] errors = nn.validation(getDataLab1());
+                double accuError = 0;
+                for(int k = 0; k < errors.length; k++){
+                    accuError += errors[k];
+                }
+                System.out.print(accuError + "; ");
+                
+            }
+            j++;
+            System.out.println("");
+        }
 //        int[] layers = {1,6,5,4,3,2,1};
 //        boolean[] biases = {false,false,false,false,false,false,false};
-        LearningMethod bp = new Backpropagation();
-        NeuralNet nn = new NeuralNet(layers, biases, bp);
+        
+//        NeuralNet nn = new NeuralNet(layers, biases, bp);
 //        nn.printNet();
 //        nn.printWeights();
-        nn.setData(getDataLab1());
+//        nn.setData(getDataLab1());
 //        nn.setData(getOtherData());
-        nn.learn(learningRate, iterations);
+//        nn.learn(learningRate, iterations);
 //        nn.printWeights();
 //        nn.printOutputValue();
 
 //        double[] test = {0,0,0,0,0,0,0,1};
 //        nn.predict(test);
-        double[] errors = nn.validation(getDataLab1());
-//        System.out.println(Arrays.toString(errors));
+//        double[] errors = nn.validation(getDataLab1());
+        
 //        ArrayList<ArrayList<double[]>> data = getData(40);
 //        for(int i = 0; i<data.size(); i++) {
 //            System.out.println(Arrays.toString(data.get(i).get(0)));
