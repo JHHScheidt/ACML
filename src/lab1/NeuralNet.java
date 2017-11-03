@@ -154,12 +154,6 @@ public class NeuralNet {
             }
         }
         
-        System.out.print("Predicting using input ");
-        for(int i = 0; i < vertices.get(0).size()-1; i++){
-            System.out.print(vertices.get(0).get(i).getValue() +"; ");
-        }
-        System.out.println("");
-        
         double[] result = {0,0,0,0,0,0,0,0};
         for(int i = 0; i<vertices.get(vertices.size()-1).size(); i++) {
             result[i] = vertices.get(vertices.size()-1).get(i).getValue();
