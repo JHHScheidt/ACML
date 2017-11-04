@@ -1,7 +1,6 @@
 package lab1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A learning method which implements the interface: LearningMethod.
@@ -17,19 +16,19 @@ public class Backpropagation implements LearningMethod {
      * The first arraylist are the different datapoints.
      * The second arraylist is always a list of size 2; the input node and the output node
      */
-    ArrayList<ArrayList<double[]>> data;
+    private ArrayList<ArrayList<double[]>> data;
     /**
      * The list of edges.
      * The first arraylist represents the layers between the vertex layers (meaning edges.size = vertives.size-1).
      * The second arraylist represents a list of edges for some layer i.
      */
-    ArrayList<ArrayList<Edge>> edges;
+    private ArrayList<ArrayList<Edge>> edges;
     /**
      * The list of vertices.
      * The first arraylist represents the layers of the neural network.
      * The second arraylist represents a list of Vertices of some layer i.
      */
-    ArrayList<ArrayList<Vertex>> vertices;
+    private ArrayList<ArrayList<Vertex>> vertices;
 
     /**
      * Creates a new Backpropagation weight learning class.
@@ -48,11 +47,6 @@ public class Backpropagation implements LearningMethod {
     @Override
     public void learnWeights(double learningRate, int iterations) {
         for(int i = 0; i<iterations; i++) {
-            for(int j = 0; j<edges.size(); j++) {
-                for(Edge e : edges.get(j)) {
-                    e.setDelta(0.0);
-                }
-            }
             learningIteration(learningRate);
         }
 
@@ -64,11 +58,9 @@ public class Backpropagation implements LearningMethod {
      *
      * @param learningRate The learning rate alpha used when changing the current weights
      */
-    public void learningIteration(double learningRate) {
+    private void learningIteration(double learningRate) {
 
-        for(int i = 0; i<data.size(); i++) {
-            ArrayList<double[]> currentData = data.get(i);
-
+        for(ArrayList<double[]> currentData : data) {
             //Set first layer values
             for(int j = 0; j<currentData.get(0).length; j++) {
                 vertices.get(0).get((vertices.get(0).get(0).getBias()?1:0)+j).setValue(currentData.get(0)[j]);
@@ -79,10 +71,10 @@ public class Backpropagation implements LearningMethod {
             backwardPropagation(currentData.get(1));
 
             //Update weights
-            for(int j = 0; j<edges.size();j++) {
-                for(Edge e : edges.get(j)) {
+            for(ArrayList<Edge> edgeList : edges) {
+                for(Edge e : edgeList)
                     e.setWeight(e.getWeight()-learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
-                }
+
             }
         }
     }
@@ -90,7 +82,7 @@ public class Backpropagation implements LearningMethod {
     /**
      * Performs the forward propagation of the neural network.
      */
-    public void feedForward() {
+    private void feedForward() {
         //Perform forward propagation CORRECT
         for(int j = 1; j<vertices.size(); j++) {
             for(int k = 0; k<vertices.get(j).size(); k++) {
@@ -108,7 +100,7 @@ public class Backpropagation implements LearningMethod {
     /**
      * Calculates the delta values according to the backward propagation algorithm.
      */
-    public void backwardPropagation(double[] output) {
+    private void backwardPropagation(double[] output) {
         //Calculate deltas
         for(int j = vertices.size()-1; j>0; j--) {
             for(int k = 0; k<vertices.get(j).size(); k++) {
@@ -131,7 +123,7 @@ public class Backpropagation implements LearningMethod {
      * @param z Value to be filled in into sigmoid
      * @return The result from the sigmoid function
      */
-    public double sigmoid(double z) {
+    private double sigmoid(double z) {
         return 1/(1+Math.exp(-z));
     }
 

@@ -7,14 +7,12 @@ package lab1;
  * @author Marciano Geijselaers
  * @author Joshua Scheidt
  */
-public class Edge {
+class Edge {
 
     /** The two Vertex objects which need to be connected */
     private Vertex input, output;
     /** The weights of this edge */
     private double w;
-    /** The delta value calculated in the backpropagation */
-    private double Delta = 0;
 
     /**
      * Constructor method which creates a new edge between the given vertices using some weight.
@@ -23,19 +21,10 @@ public class Edge {
      * @param output The vertex to which the connection is going
      * @param w The weight of this edge
      */
-    public Edge(Vertex input, Vertex output, double w){
+    Edge(Vertex input, Vertex output, double w){
         this.input = input;
         this.output = output;
         this.w = w;
-    }
-
-    /**
-     * Sets the value of the backpropagation delta value.
-     *
-     * @param Delta The new backpropagation delta value
-     */
-    public void setDelta(double Delta){
-        this.Delta = Delta;
     }
 
     /**
@@ -43,17 +32,8 @@ public class Edge {
      *
      * @param w The new weight of this edge
      */
-    public void setWeight(double w){
+    void setWeight(double w){
         this.w = w;
-    }
-
-    /**
-     * Returns the backpropagation delta value of this edge.
-     *
-     * @return The backpropagation delta value of this edge
-     */
-    public double getDelta(){
-        return this.Delta;
     }
 
     /**
@@ -61,7 +41,7 @@ public class Edge {
      *
      * @return The weight of this edge
      */
-    public double getWeight(){
+    double getWeight(){
         return this.w;
     }
 
@@ -70,7 +50,7 @@ public class Edge {
      *
      * @return The input vertex
      */
-    public Vertex getVertexInput(){
+    Vertex getVertexInput(){
         return this.input;
     }
 
@@ -79,7 +59,7 @@ public class Edge {
      *
      * @return The output vertex
      */
-    public Vertex getVertexOutput(){
+    Vertex getVertexOutput(){
         return this.output;
     }
 }

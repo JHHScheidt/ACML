@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Marciano Geijselaers
  * @author Joshua Scheidt
  */
-public class Vertex {
+class Vertex {
     /** The value of this vertex */
     private double value = 0.0;
     /** The edges connected to nodes from a previous layer */
@@ -25,9 +25,9 @@ public class Vertex {
      * Constructor method which creates a new vertex without value or bias.
      * This constructor is used for all nodes which are not a bias node or from the input layer.
      */
-    public Vertex(){
-        this.inputEdges = new ArrayList<Edge>();
-        this.outputEdges = new ArrayList<Edge>();
+    Vertex(){
+        this.inputEdges = new ArrayList<>();
+        this.outputEdges = new ArrayList<>();
     }
 
     /**
@@ -37,11 +37,11 @@ public class Vertex {
      * @param value The value of the node
      * @param biased The bias value of the node
      */
-    public Vertex( double value, boolean biased ) {
+    Vertex( double value, boolean biased ) {
         this.value=value;
         this.biased = biased;
-        this.inputEdges = new ArrayList<Edge>();
-        this.outputEdges = new ArrayList<Edge>();
+        this.inputEdges = new ArrayList<>();
+        this.outputEdges = new ArrayList<>();
     }
 
     /**
@@ -49,7 +49,7 @@ public class Vertex {
      *
      * @param e The to be added edge
      */
-    public void addInputEdge( Edge e ) {
+    void addInputEdge( Edge e ) {
         this.inputEdges.add(e);
     }
 
@@ -58,7 +58,7 @@ public class Vertex {
      *
      * @param e The to be added edge
      */
-    public void addOutputEdge( Edge e ) {
+    void addOutputEdge( Edge e ) {
         this.outputEdges.add(e);
     }
 
@@ -67,7 +67,7 @@ public class Vertex {
      *
      * @return The value of this node
      */
-    public double getValue() {
+    double getValue() {
         return this.value;
     }
 
@@ -76,7 +76,7 @@ public class Vertex {
      *
      * @return The backpropagation delta value
      */
-    public double getDelta() {
+    double getDelta() {
         return this.delta;
     }
 
@@ -85,7 +85,7 @@ public class Vertex {
      *
      * @param value The new value of this node
      */
-    public void setValue(double value) {
+    void setValue(double value) {
         this.value=value;
     }
 
@@ -94,7 +94,7 @@ public class Vertex {
      *
      * @param delta The new backpropagation delta value
      */
-    public void setDelta(double delta) {
+    void setDelta(double delta) {
         this.delta = delta;
     }
 
@@ -103,7 +103,7 @@ public class Vertex {
      *
      * @return The set of input edges
      */
-    public ArrayList<Edge> getInputEdges() {
+    ArrayList<Edge> getInputEdges() {
         return this.inputEdges;
     }
 
@@ -112,7 +112,7 @@ public class Vertex {
      *
      * @return The set of output edges
      */
-    public ArrayList<Edge> getOutputEdges() {
+    ArrayList<Edge> getOutputEdges() {
         return this.outputEdges;
     }
 
@@ -121,7 +121,7 @@ public class Vertex {
      *
      * @return The bias value
      */
-    public boolean getBias() {
+    boolean getBias() {
         return this.biased;
     }
 }

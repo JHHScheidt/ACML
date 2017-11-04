@@ -1,8 +1,6 @@
 package lab1;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -28,7 +26,7 @@ public class NeuralNet {
     /** A random number generator for consistent values */
     private static Random generator = new Random(3);
     /** The constant used for bias vertices */
-    private final double biasConstant = 1;
+    private final double BIASVALUE = 1;
     /** The class used for learning the weights */
     private LearningMethod learner;
     /** The training data */
@@ -44,16 +42,16 @@ public class NeuralNet {
      * @param learner A class used for learning weights
      */
     public NeuralNet(int[] layers, boolean[] bias, LearningMethod learner){
-        this.vertices = new ArrayList<ArrayList<Vertex>>();
-        this.edges = new ArrayList<ArrayList<Edge>>();
+        this.vertices = new ArrayList<>();
+        this.edges = new ArrayList<>();
         this.learner = learner;
         this.bias = bias;
 
         for(int i = 0; i < layers.length; i++){
-            vertices.add(new ArrayList<Vertex>());
+            vertices.add(new ArrayList<>());
             if(i != layers.length - 1){
                 if(bias[i]){
-                    vertices.get(i).add(new Vertex(biasConstant, true));
+                    vertices.get(i).add(new Vertex(BIASVALUE, true));
                 }
             }
             for(int j = 0; j < layers[i]; j++){
@@ -61,12 +59,10 @@ public class NeuralNet {
             }
         }
         for(int i = 0; i < vertices.size() - 1; i++){
-            edges.add(new ArrayList<Edge>());
+            edges.add(new ArrayList<>());
             for(int j = 0; j < vertices.get(i).size(); j++){
                 for(int k = 0; k < vertices.get(i+1).size(); k++){
-                    if(vertices.get(i+1).get(k).getBias()){
-
-                    } else {
+                    if(!vertices.get(i + 1).get(k).getBias()){
                         Edge temp = new Edge(vertices.get(i).get(j), vertices.get(i+1).get(k), generator.nextDouble()*2);
                         edges.get(i).add(temp);
                         vertices.get(i).get(j).addOutputEdge(temp);
@@ -105,14 +101,14 @@ public class NeuralNet {
      *
      * @param data The training data
      */
-    public void setData(ArrayList<ArrayList<double[]>> data) {
+    void setData(ArrayList<ArrayList<double[]>> data) {
         this.data = data;
     }
 
     /**
      * Starts the learning process for the weights.
      */
-    public void learn(double learningRate, int iterations) {
+    void learn(double learningRate, int iterations) {
         learner.setData(this.data, this.edges, this.vertices);
         learner.learnWeights(learningRate, iterations);
     }
@@ -122,7 +118,7 @@ public class NeuralNet {
      * @param data The validation data
      * @return Returns a double[] with the accumulated error for each validation instance
      */
-    public double[] validation(ArrayList<ArrayList<double[]>> data){
+    double[] validation(ArrayList<ArrayList<double[]>> data){
         double accuError[] = new double[data.get(0).get(1).length];
         for(int i = 0; i < data.size(); i++){
             double[] result = this.predict(data.get(i).get(0));
@@ -138,7 +134,7 @@ public class NeuralNet {
      * @param input The input for the prediction
      * @return The output for the prediction
      */
-    public double[] predict(double[] input) {
+    double[] predict(double[] input) {
         //Set first layer values
         for(int j = 0; j<input.length; j++) {
             vertices.get(0).get(((this.bias[0]?1:0))+j).setValue(input[j]);
@@ -165,23 +161,23 @@ public class NeuralNet {
      * @param z The value of the sum of previous activation nodes multiplied with the weights
      * @return The sigmoid value
      */
-    public double sigmoid(double z) {
+    private double sigmoid(double z) {
         return 1/(1+Math.exp(-z));
     }
 
     /**
      * Prints the current data.
      */
-    public void printCurrentData(){
-        for(int i = 0; i < this.data.size(); i++){
+    void printCurrentData(){
+        for(ArrayList<double[]> currentData : this.data){
             System.out.println("This should print the input: ");
-            for(int k = 0; k < this.data.get(i).get(0).length; k++){
-                System.out.print(this.data.get(i).get(0)[k] + "; ");
+            for(int k = 0; k < currentData.get(0).length; k++){
+                System.out.print(currentData.get(0)[k] + "; ");
             }
             System.out.println("");
             System.out.println("This should print the output: ");
-            for(int k = 0; k < this.data.get(i).get(0).length; k++){
-                System.out.print(this.data.get(i).get(0)[k] + "; ");
+            for(int k = 0; k < currentData.get(0).length; k++){
+                System.out.print(currentData.get(0)[k] + "; ");
             }
             System.out.println("");
         }
@@ -190,7 +186,7 @@ public class NeuralNet {
      * Prints the values on the layer with index l
      * @param l the index of the to be printed layer
      */
-    public void printLayerValues(int l){
+    void printLayerValues(int l){
         if((l >= 0) && (l < vertices.size())){
             System.out.println("The current values on the layer: " + l + " are ");
             for(Vertex v : vertices.get(l)){
@@ -204,7 +200,7 @@ public class NeuralNet {
     /**
      * Prints the current output nodes.
      */
-    public void printOutputValue(){
+    void printOutputValue(){
         System.out.println("The current values on the output nodes: ");
         for (Vertex v : vertices.get(vertices.size()-1)) {
             System.out.print( v.getValue() +"; ");
@@ -215,7 +211,7 @@ public class NeuralNet {
      * This method allows the printing of weights of a specific edge layer
      * @param l the edge layer to be printed
      */
-    public void printLayerWeights(int l){
+    void printLayerWeights(int l){
         if((l >= 0) && (l < edges.size())){
             System.out.println("The current weights on edge layer: " + l + " are ");
             for(Edge e : edges.get(l)){
@@ -229,7 +225,7 @@ public class NeuralNet {
     /**
      * Prints the weights of the edges.
      */
-    public void printWeights(){
+    void printWeights(){
         for(int i = 0; i < edges.size(); i++){
             System.out.print("The weights for edge layer: " + i + " are ");
             for(int j = 0; j < edges.get(i).size(); j++){
@@ -242,16 +238,16 @@ public class NeuralNet {
     /**
      * Prints the neural network information.
      */
-    public void printNet(){
+    void printNet(){
         System.out.println("Number of layers: " + vertices.size());
         System.out.println("Number of connection layers: " + edges.size());
         int numVertices = 0;
-        for(int i = 0; i < vertices.size(); i++){
-            numVertices += vertices.get(i).size();
+        for(ArrayList<Vertex> vertex : vertices){
+            numVertices += vertex.size();
         }
         int numEdges = 0;
-        for(int i = 0; i < edges.size(); i++){
-            numEdges += edges.get(i).size();
+        for(ArrayList<Edge> edge : edges){
+            numEdges += edge.size();
         }
         System.out.println("Number of vertices: " + numVertices);
         System.out.println("Number of edges: " + numEdges);
