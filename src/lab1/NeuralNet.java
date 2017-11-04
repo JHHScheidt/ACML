@@ -186,7 +186,21 @@ public class NeuralNet {
             System.out.println("");
         }
     }
-
+    /**
+     * Prints the values on the layer with index l
+     * @param l the index of the to be printed layer
+     */
+    public void printLayerValues(int l){
+        if((l >= 0) && (l < vertices.size())){
+            System.out.println("The current values on the layer: " + l + " are ");
+            for(Vertex v : vertices.get(l)){
+                System.out.print(v.getValue() + "; ");
+            }
+            System.out.println("");
+        }else{
+            System.out.println("The value has to be within the range of 0 to " + Math.decrementExact(vertices.size()));
+        }
+    }
     /**
      * Prints the current output nodes.
      */
@@ -197,7 +211,21 @@ public class NeuralNet {
         }
         System.out.println("");
     }
-
+    /**
+     * This method allows the printing of weights of a specific edge layer
+     * @param l the edge layer to be printed
+     */
+    public void printLayerWeights(int l){
+        if((l >= 0) && (l < edges.size())){
+            System.out.println("The current weights on edge layer: " + l + " are ");
+            for(Edge e : edges.get(l)){
+                System.out.print(e.getWeight() + "; ");
+            }
+            System.out.println("");
+        }else{
+            System.out.println("The value has to be within the range of 0 to " + Math.decrementExact(edges.size()));
+        }
+    }
     /**
      * Prints the weights of the edges.
      */

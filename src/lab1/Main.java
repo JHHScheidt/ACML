@@ -33,6 +33,10 @@ public class Main {
         nn.learn(learningRate, iterations);
         //Here you can see what the output value currently is after a certain learning period
         //nn.printOutputValue();
+        //The following print out will print the value on any layer you input
+        //nn.printLayerValues(1);
+        //The following allows the weights to be printed per requested edge layer
+        //nn.printLayerWeights(1);
         //To run a test example through the network with learned weights one can call 
         //the validation method with any number of test instances this will return
         //a double array that includes the total error for each instance
