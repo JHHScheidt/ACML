@@ -7,7 +7,7 @@ import java.util.Arrays;
  * A learning method which implements the interface: LearningMethod.
  *
  * @see lab1.LearningMethod
- * @author Marciano Geijeselaers
+ * @author Marciano Geijselaers
  * @author Joshua Scheidt
  */
 public class Backpropagation implements LearningMethod {

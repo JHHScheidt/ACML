@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * The general neural network class which can adapt to different learning methods.
  *
- * @author Marciano Geijeselaers
+ * @author Marciano Geijselaers
  * @author Joshua Scheidt
  */
 public class NeuralNet {

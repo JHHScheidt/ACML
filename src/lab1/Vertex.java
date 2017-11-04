@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * A vertex class which represents a single node in a neural network.
  * This class can be used for all layers and node types.
  *
- * @author Marciano Geijeselaers
+ * @author Marciano Geijselaers
  * @author Joshua Scheidt
  */
 public class Vertex {

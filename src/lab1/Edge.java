@@ -4,7 +4,7 @@ package lab1;
  * An Edge class which represents a connection between two Vertex objects in a neural network.
  * This class for the connection between all layers.
  *
- * @author Marciano Geijeselaers
+ * @author Marciano Geijselaers
  * @author Joshua Scheidt
  */
 public class Edge {

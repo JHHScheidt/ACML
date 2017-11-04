@@ -9,53 +9,67 @@ public class Main {
     private static Random generator = new Random(1024);
 
     public static void main(String[] args) {
-
+        //Initialise the number of layers and number of nodes in this layer here
+        //For our assignment we were using 3 layers with 8, 3, 8 nodes respectively
         int[] layers = {8,3,8};
+        //Set the biases for every layer output layer is always false
+        //The bias is always 1
         boolean[] biases = {true, true, false};
-        double learningRate;
-        int iterations;
+        //Set your learningRate and number of iterations for the learning
+        double learningRate = 0.9;
+        int iterations = 1000;
+        //An interface was implemented to allow introduction of another kind of 
+        //learning method in the future
         LearningMethod bp = new Backpropagation();
-        for(int j = 1; j <= 10; j += 1){
-            iterations = j;
-            learningRate = 1;
-            for(int i = 1; i < 11; i++){
-                learningRate = 0.1*i;
-                NeuralNet nn = new NeuralNet(layers, biases, bp);
-                nn.setData(getDataLab1());
-                nn.learn(learningRate, iterations);
-                double[] errors = nn.validation(getDataLab1());
-                double accuError = 0;
-                for(int k = 0; k < errors.length; k++){
-                    accuError += errors[k];
-                }
-                System.out.print(accuError + "; ");
-                
-            }
-            System.out.println("");
-        }
-//        int[] layers = {1,6,5,4,3,2,1};
-//        boolean[] biases = {false,false,false,false,false,false,false};
+        //This initiates you Neural network
+        NeuralNet nn = new NeuralNet(layers, biases, bp);
+        //Mostly below statements are for debugging purposes but can also be used
+        //to check if there was proper initialisation
+        //nn.printNet();
+        //nn.printWeights();
+        //This sets the data to be used for training
+        nn.setData(getDataLab1());
+        //This starts the learner
+        nn.learn(learningRate, iterations);
+        //Here you can see what the output value currently is after a certain learning period
+        //nn.printOutputValue();
+        //To run a test example through the network with learned weights one can call 
+        //the validation method with any number of test instances this will return
+        //a double array that includes the total error for each instance
+        double[] errors = nn.validation(getDataLab1());
+        //These errors can be used to find out what combination of learningrate and iterations
+        //gives you the steepest decline. This is what we tried to find out in the for loop later
+        //in this method
         
-//        NeuralNet nn = new NeuralNet(layers, biases, bp);
-//        nn.printNet();
-//        nn.printWeights();
-//        nn.setData(getDataLab1());
-//        nn.setData(getOtherData());
-//        nn.learn(learningRate, iterations);
-//        nn.printWeights();
-//        nn.printOutputValue();
-
-//        double[] test = {0,0,0,0,0,0,0,1};
-//        nn.predict(test);
-//        double[] errors = nn.validation(getDataLab1());
         
-//        ArrayList<ArrayList<double[]>> data = getData(40);
-//        for(int i = 0; i<data.size(); i++) {
-//            System.out.println(Arrays.toString(data.get(i).get(0)));
-//            System.out.println(Arrays.toString(data.get(i).get(1)));
+        
+//        This was used for the calculation of the error and to see what would be
+//        the ideal learningrate and number of iterations
+//        for(int j = 10000; j <= 100000; j += 10000){
+//            iterations = j;
+//            for(int i = 11; i < 21; i++){
+//                learningRate = 0.1*i;
+//                NeuralNet nn = new NeuralNet(layers, biases, bp);
+//                nn.setData(getDataLab1());
+//                nn.learn(learningRate, iterations);
+//                double[] errors = nn.validation(getDataLab1());
+//                double accuError = 0;
+//                for(int k = 0; k < errors.length; k++){
+//                    accuError += errors[k];
+//                }
+//                System.out.print(accuError + "; ");
+//                
+//            }
+//            System.out.println("");
 //        }
-        // write your code here
     }
+    /**
+     * These methods show how to set your data. We encapsulate the total number of
+     * instances by an arraylist to hold all the instances. Within this arraylist each instance
+     * has its own arraylist that consists of 2 double arrays on the first index (0) will always
+     * be the input the second index (1) will always be the output
+     * @return 
+     */
     public static ArrayList getOtherData(){
         ArrayList<ArrayList<double[]>> data = new ArrayList<>();
         ArrayList d1, d2, d3, d4, d5, d6, d7, d8;

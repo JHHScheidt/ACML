@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * An interface for creating weight learning methods for a neural network.
  *
- * @author Marciano Geijeselaers
+ * @author Marciano Geijselaers
  * @author Joshua Scheidt
  */
 public interface LearningMethod {
