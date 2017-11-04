@@ -9,14 +9,14 @@ Next is to decide the bias. This is done through a boolean array, set it to true
 every layer you want a bias node. NOTE: the bias for output node is always false!
 
 After this you can set your Learningrate (advised is somewhere between 0.01 and 1)
-The iterations can also be initialised this means how many times it will run your training
+The iterations can also be initialised, which changes the number of times it will run your training
 set through the neural network and adjust the weights.
 
 An interface was introduced to allow different methods of learning while maintaining 
 the same underlying structure. In the default implementation only Backpropagation is available.
 So this can be set as a new learning method and will be needed to pass into the NN.
 
-Initialisation: The class is called NeuralNet and the constructor asks for 3 inputs, 
+Initialisation: The class is called NeuralNet and the constructor asks for 3 inputs:
 the layers with corresponding neurons, a bias boolean array and a learningmethod.
 After this the NeuralNet class will fully setup the NN. Several debug print methods have
 been made to allow checking if the initialised set up is indeed what was wished upon.
@@ -25,7 +25,8 @@ This NeuralNet object will then become your working tool, to set the data a spec
 is required. An Arraylist of instances is made, each of these instances also holds an arraylist
 of double arrays. This should always only be 2 double arrays for each instance because we 
 only have 1 input and 1 output. After initialisation of your data you can set it using the
-appropriate method.
+appropriate method. Overall, the NeuralNet class has been made in such a way that there should be
+no need to change anything in this class when different learning techniques are desired.
 
 Then upon calling the learn method the learningrate and iterations can be entered upon 
 which the NN will start doing the feed forward value calculations and weight adjusting
