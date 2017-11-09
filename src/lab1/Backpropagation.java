@@ -74,7 +74,6 @@ public class Backpropagation implements LearningMethod {
             for(ArrayList<Edge> edgeList : edges) {
                 for(Edge e : edgeList)
                     e.setWeight(e.getWeight()-learningRate*(e.getVertexInput().getValue()*e.getVertexOutput().getDelta()));
-
             }
         }
     }

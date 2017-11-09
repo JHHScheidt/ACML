@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ACML_lab1:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ACML_lab1_jar</output-path>
+    <root id="archive" name="ACML.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/lab1/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="ACML" />
+    </root>
+  </artifact>
+</component>
