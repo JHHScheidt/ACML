@@ -126,8 +126,10 @@ public class Example {
         //5.3MB file in UTF-8 Encoding, ~5.4 million characters
         //https://www.gutenberg.org/ebooks/100
         String url = "https://s3.amazonaws.com/dl4j-distribution/pg100.txt";
-        String tempDir = System.getProperty("java.io.tmpdir");
-        String fileLocation = tempDir + "/Shakespeare.txt";	//Storage location from downloaded file
+        //String tempDir = System.getProperty("java.io.tmpdir");
+        //String fileLocation = tempDir + "/Shakespeare.txt";	//Storage location from downloaded file
+        String currentDir = System.getProperty("user.dir");
+        String fileLocation = currentDir + "/data/boyNames.txt";
         File f = new File(fileLocation);
         if( !f.exists() ){
             FileUtils.copyURLToFile(new URL(url), f);
