@@ -72,6 +72,8 @@ public class MountainCarWindow extends JFrame {
                         int action = 0;
                         double delta = 0;
                         double gamma = 1;
+                        double alpha = 0.5;
+                        double lambda = 1;
 			while (!mc.done()) {
 				pw.paintCar();
                                 
@@ -88,9 +90,17 @@ public class MountainCarWindow extends JFrame {
                                 
                                 nextState = mc.getState();
                                 
-                                delta = mc.getReward() + gamma * sarsa.getVals(nextState[0], action, nextState[1]) - sarsa.getVals(currentState[0], action, currentState[1]);
+                                delta = mc.getReward() + gamma * sarsa.getQVals(nextState[0], action, nextState[1]) - sarsa.getQVals(currentState[0], action, currentState[1]);
+                                sarsa.setEValsCount(currentState[0], action, currentState[1]);
                                 
-                                
+                                for(int j = 0; j < sarsa.QVals.length; j++){
+                                    for(int k = 0; k < sarsa.QVals[j].length; k++){
+                                        for(int l = 0; l < sarsa.QVals[j][k].length; l++){
+                                            sarsa.setQVals(j, k, l, alpha * delta * sarsa.getEVals(j, k, l));
+                                            sarsa.setEValsUpdate(j, k, l, gamma, lambda);
+                                        }
+                                    }
+                                }
                                 stepcounter++;
 			}
 			System.out.println("Episode " + i + " took " + stepcounter + " steps.");
