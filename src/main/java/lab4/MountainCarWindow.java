@@ -80,11 +80,11 @@ public class MountainCarWindow extends JFrame {
 			while (!mc.done()) {
 				pw.paintCar();
 
+                currentState = mc.getState();
 				if(random.nextDouble()>=randomActionThreshold) {
 					action = random.nextInt(3);
 				}
 				else {
-					currentState = mc.getState();
 					double action0Q = sarsa.getQVals(currentState[0], 0, currentState[1]);
 					double action1Q = sarsa.getQVals(currentState[0], 1, currentState[1]);
 					double action2Q = sarsa.getQVals(currentState[0], 2, currentState[1]);
