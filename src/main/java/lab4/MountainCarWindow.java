@@ -79,8 +79,7 @@ public class MountainCarWindow extends JFrame {
                         double alpha = 0.1;
                         double lambda = 1;
 			while (!mc.done()) {
-				pw.paintCar();
-
+//				pw.paintCar();
 
                 currentState = mc.getState();
                 if(random.nextDouble()>=randomActionThreshold) {
@@ -94,7 +93,7 @@ public class MountainCarWindow extends JFrame {
                     else if(action1Q>=action0Q && action1Q>=action2Q) action=1;
                     else action=2;
                 }
-                                
+
                 mc.apply(action);
 
                 nextState = mc.getState();
