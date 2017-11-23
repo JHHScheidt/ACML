@@ -80,13 +80,16 @@ public class MountainCarWindowGoWithTheFlowExploration extends JFrame{
 				pw.paintCar();
 
 				currentState = mc.getState();
-
+                                //This exploration basically completes the episode
+                                //Within 200 steps always.
+                                //This is not the purpose of an exploration function
+                                //So we diverted to a different method
 				if(currentState[1] == 0){
 					action = (int)(Math.random()*3);
 				} else if(currentState[1] > 0 ){
-					action = 1;
+					action = 2;
 				} else {
-					action = -1;
+					action = 0;
 				}
 
 				mc.apply(action);
