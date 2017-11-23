@@ -73,9 +73,10 @@ public class MountainCarWindowGoWithTheFlowExploration extends JFrame{
                         double[] nextState;
                         int action = 0;
                         double delta = 0;
-                        double gamma = 0.5;
+                        double gamma = 1;
                         double alpha = 0.1;
                         double lambda = 1;
+                        double action0, action1, action2;
 			while (!mc.done()) {
 				pw.paintCar();
 
@@ -84,7 +85,8 @@ public class MountainCarWindowGoWithTheFlowExploration extends JFrame{
                                 //Within 200 steps always.
                                 //This is not the purpose of an exploration function
                                 //So we diverted to a different method
-				if(currentState[1] == 0){
+                                if(i <= 8){
+				if(currentState[1] == 0 || Math.random() <= 0.66){
 					action = (int)(Math.random()*3);
 				} else if(currentState[1] > 0 ){
 					action = 2;
@@ -107,6 +109,19 @@ public class MountainCarWindowGoWithTheFlowExploration extends JFrame{
 						}
 					}
 				}
+                                } else {
+                                    currentState = mc.getState();
+                                    action0 = sarsa.getQVals(currentState[0], 0, currentState[1]);
+                                    action1 = sarsa.getQVals(currentState[0], 1, currentState[1]);
+                                    action2 = sarsa.getQVals(currentState[0], 2, currentState[1]);
+                                    if(action0 >= action1 && action0 >= action2){
+                                        mc.apply(0);
+                                    } else if(action1 >= action0 && action1 >= action2){
+                                        mc.apply(1);
+                                    } else {
+                                        mc.apply(2);
+                                    }
+                                }
 				stepcounter++;
 			}
 			System.out.println("Episode " + i + " took " + stepcounter + " steps.");
