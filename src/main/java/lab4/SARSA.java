@@ -15,9 +15,23 @@ public class SARSA {
 
     public double[][][] QVals;
     public double[][][] e;
+    double MINPOS;
+    double MAXPOS;
+    double POSSTEP;
+    int numActions;
+    double MINVEL;
+    double MAXVEL;
+    double VELSTEP;
     private Random random = new Random(1024);
 
     public SARSA(double MINPOS, double MAXPOS, double POSSTEP, int numActions, double MINVEL, double MAXVEL, double VELSTEP) {
+        this.MINPOS=MINPOS;
+        this.MAXPOS=MAXPOS;
+        this.POSSTEP=POSSTEP;
+        this.numActions=numActions;
+        this.MINVEL=MINVEL;
+        this.MAXVEL=MAXVEL;
+        this.VELSTEP=VELSTEP;
 //        int numQVals = new Double(((MAXPOS-MINPOS)/POSSTEP) * numActions * ((MAXVEL-MINVEL)/VELSTEP)).intValue();
         QVals = new double[(int)((MAXPOS-MINPOS)/POSSTEP)][numActions][(int)((MAXVEL-MINVEL)/VELSTEP)];
         e = new double[(int)((MAXPOS-MINPOS)/POSSTEP)][numActions][(int)((MAXVEL-MINVEL)/VELSTEP)];

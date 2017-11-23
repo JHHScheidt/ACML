@@ -68,14 +68,15 @@ public class MountainCarWindow extends JFrame {
 		MountainCarWindow pw = new MountainCarWindow(mc);
 		SARSA sarsa = new SARSA(mc.MIN_POS, mc.MAX_POS, 0.0005, 3, -mc.MAX_SPEED, mc.MAX_SPEED, 0.0005);
                 //System.out.println(sarsa.QVals.containsKey(new PAVTuple(-0.0405, 1, 0.0205)));
-		for (int i=0; i<10; i++) {
+        int iterations = 1000;
+		for (int i=0; i<iterations; i++) {
 			mc.randomInit();
 			int stepcounter = 0;
                         double[] currentState;
                         double[] nextState;
                         int action = 0;
                         double delta = 0;
-                        double gamma = 0.5;
+                        double gamma = 0.9;
                         double alpha = 0.1;
                         double lambda = 1;
 			while (!mc.done()) {
@@ -113,8 +114,11 @@ public class MountainCarWindow extends JFrame {
 //                }
                 stepcounter++;
 			}
-			System.out.println("Episode " + i + " took " + stepcounter + " steps.");
+			if(i>=iterations-10)
+			    System.out.println("Episode " + i + " took " + stepcounter + " steps.");
 		}
+        Plot plot = new Plot("ACTION", sarsa);
+
 		pw.dispose();
 	}
 	
