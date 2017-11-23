@@ -125,8 +125,10 @@ public class MountainCarWindow extends JFrame {
 			if(i>=iterations-10)
 			    System.out.println("Episode " + i + " took " + stepcounter + " steps.");
 		}
-        Plot plot = new Plot("ACTION", sarsa);
-        System.out.println("highest:"+highestQ+"     lowest:"+lowestQ);
+        System.out.println("highest Q:"+highestQ+"     lowest Q:"+lowestQ);
+
+        new Plot(sarsa);
+//        new Plot(sarsa, highestQ, lowestQ);
         pw.dispose();
 	}
 	
