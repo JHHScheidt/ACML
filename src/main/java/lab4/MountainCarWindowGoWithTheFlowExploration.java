@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.lab4;
+package lab4;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -78,47 +78,15 @@ public class MountainCarWindowGoWithTheFlowExploration extends JFrame{
                         double lambda = 1;
 			while (!mc.done()) {
 				pw.paintCar();
-<<<<<<< HEAD:src/main/java/lab4/MountainCarWindowGoWithTheFlowExploration.java
-                                
-                                currentState = mc.getState();
-                                
-                                if(currentState[1] == 0){
-                                    action = (int)(Math.random()*3);
-                                } else if(currentState[1] > 0 ){
-                                    action = 1;
-                                } else {
-                                    action = -1;
-                                }
-                                
-                                mc.apply(action);
-                                
-                                nextState = mc.getState();
-                                
-                                delta = mc.getReward() + gamma * sarsa.getQVals(nextState[0], action, nextState[1]) - sarsa.getQVals(currentState[0], action, currentState[1]);
-                                sarsa.setEValsCount(currentState[0], action, currentState[1]);
-                                
-                                for(int j = 0; j < sarsa.QVals.length; j++){
-                                    for(int k = 0; k < sarsa.QVals[j].length; k++){
-                                        for(int l = 0; l < sarsa.QVals[j][k].length; l++){
-                                            sarsa.setQVals(j, k, l, alpha * delta * sarsa.getEVals(j, k, l));
-                                            sarsa.setEValsUpdate(j, k, l, gamma, lambda);
-                                        }
-                                    }
-                                }
-                                stepcounter++;
-=======
 
-                currentState = mc.getState();
-				if(random.nextDouble()>=randomActionThreshold) {
-					action = random.nextInt(3);
-				}
-				else {
-					double action0Q = sarsa.getQVals(currentState[0], 0, currentState[1]);
-					double action1Q = sarsa.getQVals(currentState[0], 1, currentState[1]);
-					double action2Q = sarsa.getQVals(currentState[0], 2, currentState[1]);
-					if(action0Q>=action1Q && action0Q>=action2Q) action=0;
-					else if(action1Q>=action0Q && action1Q>=action2Q) action=1;
-					else action=2;
+				currentState = mc.getState();
+
+				if(currentState[1] == 0){
+					action = (int)(Math.random()*3);
+				} else if(currentState[1] > 0 ){
+					action = 1;
+				} else {
+					action = -1;
 				}
 
 				mc.apply(action);
@@ -137,7 +105,6 @@ public class MountainCarWindowGoWithTheFlowExploration extends JFrame{
 					}
 				}
 				stepcounter++;
->>>>>>> 523fe6cc30df120644c17b4a5a7f61200f6af732:src/main/java/lab4/MountainCarWindow.java
 			}
 			System.out.println("Episode " + i + " took " + stepcounter + " steps.");
 		}
