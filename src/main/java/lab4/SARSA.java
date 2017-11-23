@@ -15,18 +15,18 @@ import java.util.Random;
 public class SARSA {
 
     public double[][][] QVals;
-    public int[][][] e;
+    public double[][][] e;
     private Random random = new Random(1024);
 
     public SARSA(double MINPOS, double MAXPOS, double POSSTEP, int numActions, double MINVEL, double MAXVEL, double VELSTEP) {
 //        int numQVals = new Double(((MAXPOS-MINPOS)/POSSTEP) * numActions * ((MAXVEL-MINVEL)/VELSTEP)).intValue();
         QVals = new double[(int)((MAXPOS-MINPOS)/POSSTEP)][numActions][(int)((MAXVEL-MINVEL)/VELSTEP)];
-        e = new int[(int)((MAXPOS-MINPOS)/POSSTEP)][numActions][(int)((MAXVEL-MINVEL)/VELSTEP)];
+        e = new double[(int)((MAXPOS-MINPOS)/POSSTEP)][numActions][(int)((MAXVEL-MINVEL)/VELSTEP)];
         for(int i =0; i<QVals.length; i++) {
             for(int j = 0; j<QVals[i].length; j++) {
                 for(int k = 0; k<QVals[i][j].length; k++) {
                     QVals[i][j][k] = random.nextDouble()*2-1;
-                    e[i][j][k] = 0;
+                    e[i][j][k] = 0.0;
                 }
             }
         }
@@ -44,7 +44,7 @@ public class SARSA {
         return QVals[getPositionIndex(position)][action][getVelocityIndex(velocity)];
     }
 
-    public int getEVals(double position, int action, double velocity) {
+    public double getEVals(double position, int action, double velocity) {
         return e[getPositionIndex(position)][action][getVelocityIndex(velocity)];
     }
 
@@ -52,8 +52,12 @@ public class SARSA {
         QVals[getPositionIndex(position)][action][getVelocityIndex(velocity)] = QVal;
     }
 
-    public void setEVals(double position, int action, double velocity) {
+    public void setEValsCount(double position, int action, double velocity) {
         e[getPositionIndex(position)][action][getVelocityIndex(velocity)] += 1;
+    }
+
+    public void setEValsUpdate(double position, int action, double velocity, double gamma, double lambda) {
+        e[getPositionIndex(position)][action][getVelocityIndex(velocity)] *= (gamma*lambda);
     }
 
 }
