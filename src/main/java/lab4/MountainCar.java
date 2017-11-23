@@ -38,10 +38,7 @@ public class MountainCar {
 	}
 	
 	public double getReward() {
-		if (position>GOAL_POS)
-			return 0.0;
-		else 
-			return -1.0;
+		return 2*Math.pow((position+0.5),2);
 	}
 	
 	public boolean done() {

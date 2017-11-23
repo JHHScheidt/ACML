@@ -24,7 +24,7 @@ public class MountainCarWindow extends JFrame {
 	private MountainCarViewer view;
 
 	private static Random random = new Random(42);
-    private static double randomActionThreshold = 0.90;
+    private static double randomActionThreshold = 0.9;
 
 	public MountainCarWindow(MountainCar mc) {
 		super("Pendulum Environment");
@@ -99,17 +99,19 @@ public class MountainCarWindow extends JFrame {
 
                 nextState = mc.getState();
 
-                delta = mc.getReward() + gamma * sarsa.getQVals(nextState[0], action, nextState[1]) - sarsa.getQVals(currentState[0], action, currentState[1]);
-                sarsa.setEValsCount(currentState[0], action, currentState[1]);
+                sarsa.QVals[sarsa.getPositionIndex(currentState[0])][action][sarsa.getVelocityIndex( currentState[1])] = mc.getReward() + gamma*(Math.max(sarsa.getQVals(nextState[0],2, nextState[1]), Math.max(sarsa.getQVals(nextState[0],0, nextState[1]), sarsa.getQVals(nextState[0],1, nextState[1]))));
 
-                for(int j = 0; j < sarsa.QVals.length; j++){
-                    for(int k = 0; k < sarsa.QVals[j].length; k++){
-                        for(int l = 0; l < sarsa.QVals[j][k].length; l++){
-                            sarsa.setQVals(j, k, l, alpha * delta * sarsa.getEVals(j, k, l));
-                            sarsa.setEValsUpdate(j, k, l, gamma, lambda);
-                        }
-                    }
-                }
+//                delta = mc.getReward() + gamma * sarsa.getQVals(nextState[0], action, nextState[1]) - sarsa.getQVals(currentState[0], action, currentState[1]);
+//                sarsa.setEValsCount(currentState[0], action, currentState[1]);
+//
+//                for(int j = 0; j < sarsa.QVals.length; j++){
+//                    for(int k = 0; k < sarsa.QVals[j].length; k++){
+//                        for(int l = 0; l < sarsa.QVals[j][k].length; l++){
+//                            sarsa.setQVals(j, k, l, alpha * delta * sarsa.getEVals(j, k, l));
+//                            sarsa.setEValsUpdate(j, k, l, gamma, lambda);
+//                        }
+//                    }
+//                }
                 stepcounter++;
 			}
 			System.out.println("Episode " + i + " took " + stepcounter + " steps.");
