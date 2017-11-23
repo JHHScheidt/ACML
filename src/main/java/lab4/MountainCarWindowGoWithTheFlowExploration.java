@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab4;
+package main.java.lab4;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,15 +14,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-
+/**
+ *
+ * @author Marciano
+ */
 @SuppressWarnings("serial")
-public class MountainCarWindow extends JFrame {
+public class MountainCarWindowGoWithTheFlowExploration extends JFrame{
 
 	private MountainCar mc;
 	private MountainCarViewer view;
 
-	public MountainCarWindow(MountainCar mc) {
+	public MountainCarWindowGoWithTheFlowExploration(MountainCar mc) {
 		super("Pendulum Environment");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.mc = mc;
@@ -110,3 +112,4 @@ public class MountainCarWindow extends JFrame {
 	}
 	
 }
+
