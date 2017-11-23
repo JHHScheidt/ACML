@@ -5,7 +5,6 @@
  */
 package lab4;
 
-import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -44,20 +43,20 @@ public class SARSA {
         return QVals[getPositionIndex(position)][action][getVelocityIndex(velocity)];
     }
 
-    public double getEVals(double position, int action, double velocity) {
-        return e[getPositionIndex(position)][action][getVelocityIndex(velocity)];
+    public double getEVals(int positionIndex, int actionIndex, int velocityIndex) {
+        return e[positionIndex][actionIndex][velocityIndex];
     }
 
-    public void setQVals(double position, int action, double velocity, double update) {
-        QVals[getPositionIndex(position)][action][getVelocityIndex(velocity)] += update;
+    public void setQVals(int positionIndex, int actionIndex, int velocityIndex, double update) {
+        QVals[positionIndex][actionIndex][velocityIndex] += update;
     }
 
     public void setEValsCount(double position, int action, double velocity) {
         e[getPositionIndex(position)][action][getVelocityIndex(velocity)] += 1;
     }
 
-    public void setEValsUpdate(double position, int action, double velocity, double gamma, double lambda) {
-        e[getPositionIndex(position)][action][getVelocityIndex(velocity)] *= (gamma*lambda);
+    public void setEValsUpdate(int positionIndex, int actionIndex, int velocityIndex, double gamma, double lambda) {
+        e[positionIndex][actionIndex][velocityIndex] *= (gamma*lambda);
     }
 
 }
