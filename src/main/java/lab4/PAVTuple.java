@@ -14,7 +14,7 @@ public class PAVTuple {
 
     @Override
     public int hashCode() {
-
+        return 0;
     }
 
     @Override
