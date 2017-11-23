@@ -50,7 +50,11 @@ public class SARSA {
     public void setQVals(int positionIndex, int actionIndex, int velocityIndex, double update) {
         QVals[positionIndex][actionIndex][velocityIndex] += update;
     }
-
+    
+    public void setQVals(double position, int action, double velocityIndex, double newQ){
+        QVals[this.getPositionIndex(position)][action][this.getVelocityIndex(velocityIndex)] = newQ;
+    }
+    
     public void setEValsCount(double position, int action, double velocity) {
         e[getPositionIndex(position)][action][getVelocityIndex(velocity)] += 1;
     }
