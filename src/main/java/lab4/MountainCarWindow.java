@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.lab4;
+package lab4;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -62,6 +62,8 @@ public class MountainCarWindow extends JFrame {
 	public static void main(String[] args) {
 		MountainCar mc = new MountainCar();
 		MountainCarWindow pw = new MountainCarWindow(mc);
+		SARSA sarsa = new SARSA(mc.MIN_POS, mc.MAX_POS, 0.0005, 3, -mc.MAX_SPEED, mc.MAX_SPEED, 0.0005);
+		System.out.println(sarsa.QVals.containsKey(new PAVTuple(-0.0405, 1, 0.0205)));
 		for (int i=0; i<10; i++) {
 			mc.randomInit();
 			int stepcounter = 0;
