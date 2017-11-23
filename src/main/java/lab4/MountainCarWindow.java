@@ -68,7 +68,9 @@ public class MountainCarWindow extends JFrame {
 		MountainCarWindow pw = new MountainCarWindow(mc);
 		SARSA sarsa = new SARSA(mc.MIN_POS, mc.MAX_POS, 0.0005, 3, -mc.MAX_SPEED, mc.MAX_SPEED, 0.0005);
                 //System.out.println(sarsa.QVals.containsKey(new PAVTuple(-0.0405, 1, 0.0205)));
-        int iterations = 1000;
+        int iterations = 100000;
+        double highestQ = -1000000;
+        double lowestQ = 1000000;
 		for (int i=0; i<iterations; i++) {
 			mc.randomInit();
 			int stepcounter = 0;
@@ -90,6 +92,12 @@ public class MountainCarWindow extends JFrame {
                     double action0Q = sarsa.getQVals(currentState[0], 0, currentState[1]);
                     double action1Q = sarsa.getQVals(currentState[0], 1, currentState[1]);
                     double action2Q = sarsa.getQVals(currentState[0], 2, currentState[1]);
+                    if(action0Q<lowestQ) lowestQ=action0Q;
+                    if(action1Q<lowestQ) lowestQ=action1Q;
+                    if(action2Q<lowestQ) lowestQ=action2Q;
+                    if(action0Q>highestQ) highestQ=action0Q;
+                    if(action1Q>highestQ) highestQ=action1Q;
+                    if(action2Q>highestQ) highestQ=action2Q;
                     if(action0Q>=action1Q && action0Q>=action2Q) action=0;
                     else if(action1Q>=action0Q && action1Q>=action2Q) action=1;
                     else action=2;
@@ -118,8 +126,8 @@ public class MountainCarWindow extends JFrame {
 			    System.out.println("Episode " + i + " took " + stepcounter + " steps.");
 		}
         Plot plot = new Plot("ACTION", sarsa);
-
-		pw.dispose();
+        System.out.println("highest:"+highestQ+"     lowest:"+lowestQ);
+        pw.dispose();
 	}
 	
 }

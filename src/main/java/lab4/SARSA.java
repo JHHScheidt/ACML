@@ -33,12 +33,13 @@ public class SARSA {
         this.MAXVEL=MAXVEL;
         this.VELSTEP=VELSTEP;
 //        int numQVals = new Double(((MAXPOS-MINPOS)/POSSTEP) * numActions * ((MAXVEL-MINVEL)/VELSTEP)).intValue();
-        QVals = new double[(int)((MAXPOS-MINPOS)/POSSTEP)][numActions][(int)((MAXVEL-MINVEL)/VELSTEP)];
-        e = new double[(int)((MAXPOS-MINPOS)/POSSTEP)][numActions][(int)((MAXVEL-MINVEL)/VELSTEP)];
+        QVals = new double[(int)((MAXPOS-MINPOS)/POSSTEP)+1][numActions][(int)((MAXVEL-MINVEL)/VELSTEP)+1];
+        e = new double[(int)((MAXPOS-MINPOS)/POSSTEP)+1][numActions][(int)((MAXVEL-MINVEL)/VELSTEP)+1];
         for(int i =0; i<QVals.length; i++) {
             for(int j = 0; j<QVals[i].length; j++) {
                 for(int k = 0; k<QVals[i][j].length; k++) {
-                    QVals[i][j][k] = random.nextDouble()*2-1;
+                    QVals[i][j][k] = random.nextDouble()-1;
+                    QVals[i][2][k] = random.nextDouble()*0.10-0.10;
                     e[i][j][k] = 0.0;
                 }
             }
