@@ -44,7 +44,7 @@ public class SARSA {
         return QVals[getPositionIndex(position)][action][getVelocityIndex(velocity)];
     }
 
-    public double getEVals(double position, int action, double velocity) {
+    public int getEVals(double position, int action, double velocity) {
         return e[getPositionIndex(position)][action][getVelocityIndex(velocity)];
     }
 
