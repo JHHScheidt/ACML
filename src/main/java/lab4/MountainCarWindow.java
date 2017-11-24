@@ -71,6 +71,7 @@ public class MountainCarWindow extends JFrame {
         int iterations = 100000;
         double highestQ = -1000000;
         double lowestQ = 1000000;
+        int[] stepsNeeded = new int[iterations];
 		for (int i=0; i<iterations; i++) {
 			mc.randomInit();
 			int stepcounter = 0;
@@ -124,11 +125,13 @@ public class MountainCarWindow extends JFrame {
 			}
 			if(i>=iterations-10)
 			    System.out.println("Episode " + i + " took " + stepcounter + " steps.");
+			stepsNeeded[i] = stepcounter;
 		}
         System.out.println("highest Q:"+highestQ+"     lowest Q:"+lowestQ);
 
         new Plot(sarsa);
-//        new Plot(sarsa, highestQ, lowestQ);
+        new Plot(sarsa, highestQ, lowestQ);
+//        new Plot(stepsNeeded);
         pw.dispose();
 	}
 	
