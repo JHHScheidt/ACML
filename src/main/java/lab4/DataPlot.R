@@ -20,7 +20,7 @@ actionPlot <- ggplot(actions, aes(x=Position, y=Velocity, color=Action)) +
 qValsPlot <- ggplot(qVals, aes(x=Position, y=Velocity, color=QValue)) + 
   geom_point() + scale_colour_gradient2(low="blue", mid="white", high="orange")
 timestepPlot <- ggplot(timeSteps, aes(x=Episode, y=Timestep)) + 
-  geom_point() + geom_smooth()
+  geom_point() + geom_smooth(method="loess")
 show(actionPlot)
 show(qValsPlot)
 show(timestepPlot)

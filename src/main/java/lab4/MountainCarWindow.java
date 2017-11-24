@@ -69,6 +69,7 @@ public class MountainCarWindow extends JFrame {
 		SARSA sarsa = new SARSA(mc.MIN_POS, mc.MAX_POS, 0.0005, 3, -mc.MAX_SPEED, mc.MAX_SPEED, 0.0005);
                 //System.out.println(sarsa.QVals.containsKey(new PAVTuple(-0.0405, 1, 0.0205)));
         int iterations = 100000;
+        int wins = 0;
         double highestQ = -1000000;
         double lowestQ = 1000000;
         int[] stepsNeeded = new int[iterations];
@@ -123,18 +124,24 @@ public class MountainCarWindow extends JFrame {
 //                }
                 stepcounter++;
 			}
-			if(i>=iterations-10)
-			    System.out.println("Episode " + i + " took " + stepcounter + " steps.");
+			if(i>=iterations-100)
+			    if(stepcounter<200)
+			    	wins++;
 			stepsNeeded[i] = stepcounter;
 		}
         System.out.println("highest Q:"+highestQ+"     lowest Q:"+lowestQ);
-        Plot p = new Plot(sarsa);
+		System.out.println("number of games with <200 iterations within the last 100 runs:"+wins);
+		//58% for 200 steps
+		//81% for 250 steps
+		//93% for 300 steps
+		//100% for 350 steps
+		Plot p = new Plot(sarsa);
         p.writeToFile(sarsa.QVals, true);
-//        p.writeToFile(sarsa.QVals, false);
-//        p.writeToFileEpisodeVSTimestep(stepsNeeded);
-//        new Plot(sarsa);
-//        new Plot(sarsa, highestQ, lowestQ);
-////        new Plot(stepsNeeded);
+        p.writeToFile(sarsa.QVals, false);
+        p.writeToFileEpisodeVSTimestep(stepsNeeded);
+        new Plot(sarsa);
+        new Plot(sarsa, highestQ, lowestQ);
+//        new Plot(stepsNeeded);
         pw.dispose();
 	}
 	
