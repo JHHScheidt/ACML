@@ -131,6 +131,7 @@ public class MountainCarWindow extends JFrame {
         Plot p = new Plot(sarsa);
         p.writeToFile(sarsa.QVals, true);
         p.writeToFile(sarsa.QVals, false);
+        p.writeToFileEpisodeVSTimestep(stepsNeeded);
         new Plot(sarsa);
         new Plot(sarsa, highestQ, lowestQ);
 //        new Plot(stepsNeeded);

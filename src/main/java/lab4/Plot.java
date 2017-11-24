@@ -79,6 +79,17 @@ public class Plot extends JFrame {
         setVisible(true);
     }
     
+    public void writeToFileEpisodeVSTimestep(int[] timesteps){
+        try{
+            File f = new File("src//data//EpisodesVSTimestep.txt");
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for(int i = 0; i < timesteps.length; i++){
+                bw.write(i + "," + timesteps[i]);
+                bw.newLine();
+            }
+        } catch (IOException e){System.out.println("IOException");}
+    }
     public void writeToFile(double[][][] values, boolean action){
         try{
             if(action){
@@ -106,6 +117,6 @@ public class Plot extends JFrame {
                     }
                 }
             }
-        } catch (IOException e){}
+        } catch (IOException e){System.out.println("IOException");}
     }
 }
