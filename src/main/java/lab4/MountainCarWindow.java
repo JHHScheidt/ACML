@@ -128,7 +128,9 @@ public class MountainCarWindow extends JFrame {
 			stepsNeeded[i] = stepcounter;
 		}
         System.out.println("highest Q:"+highestQ+"     lowest Q:"+lowestQ);
-
+        Plot p = new Plot(sarsa);
+        p.writeToFile(sarsa.QVals, true);
+        p.writeToFile(sarsa.QVals, false);
         new Plot(sarsa);
         new Plot(sarsa, highestQ, lowestQ);
 //        new Plot(stepsNeeded);

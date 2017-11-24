@@ -2,6 +2,11 @@ package lab4;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 
 public class Plot extends JFrame {
     public Plot(SARSA sarsa) {
@@ -73,5 +78,34 @@ public class Plot extends JFrame {
         setBounds(20, 20, 200, 200);
         setVisible(true);
     }
-
+    
+    public void writeToFile(double[][][] values, boolean action){
+        try{
+            if(action){
+                File f = new File("src//data//PositionVSVelocityHeatAction.txt");
+                FileWriter fw = new FileWriter(f);
+                BufferedWriter bw = new BufferedWriter(fw);
+                for(int i = 0; i < values.length; i++){
+                    for(int j = 0; j < values[i].length; j++){
+                        for(int k = 0; k < values[i][j].length; k++){
+                            bw.write(i + "," + k + "," + j);
+                            bw.newLine();
+                        }
+                    }
+                }
+            } else {
+                File f = new File("src//data//PositionVSVelocityHeatQValues.txt");
+                FileWriter fw = new FileWriter(f);
+                BufferedWriter bw = new BufferedWriter(fw);
+                for(int i = 0; i < values.length; i++){
+                    for(int j = 0; j < values[i].length; j++){
+                        for(int k = 0; k < values[i][j].length; k++){
+                            bw.write(i + "," + k + "," + values[i][j][k]);
+                            bw.newLine();
+                        }
+                    }
+                }
+            }
+        } catch (IOException e){}
+    }
 }
