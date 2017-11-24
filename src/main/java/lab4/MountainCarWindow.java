@@ -130,11 +130,11 @@ public class MountainCarWindow extends JFrame {
         System.out.println("highest Q:"+highestQ+"     lowest Q:"+lowestQ);
         Plot p = new Plot(sarsa);
         p.writeToFile(sarsa.QVals, true);
-        p.writeToFile(sarsa.QVals, false);
-        p.writeToFileEpisodeVSTimestep(stepsNeeded);
-        new Plot(sarsa);
-        new Plot(sarsa, highestQ, lowestQ);
-//        new Plot(stepsNeeded);
+//        p.writeToFile(sarsa.QVals, false);
+//        p.writeToFileEpisodeVSTimestep(stepsNeeded);
+//        new Plot(sarsa);
+//        new Plot(sarsa, highestQ, lowestQ);
+////        new Plot(stepsNeeded);
         pw.dispose();
 	}
 	

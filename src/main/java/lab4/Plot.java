@@ -96,24 +96,19 @@ public class Plot extends JFrame {
                 File f = new File("src//data//PositionVSVelocityHeatAction.txt");
                 FileWriter fw = new FileWriter(f);
                 BufferedWriter bw = new BufferedWriter(fw);
-                double action0, action1, action2;
                 for(int i = 0; i < values.length; i++){
                     for(int j = 0; j < values[i][0].length; j++){
                         double act0= values[i][0][j];
                         double act1= values[i][1][j];
                         double act2= values[i][2][j];
-                        double chosenQ;
                         int bestAction;
                         if(act0>=act1 && act0>=act2) {
-                            chosenQ=act0;
                             bestAction = 0;
                         }
-                        else if(act1>=act0 && act1>=act2) {
-                            chosenQ=act1;
+                        else if(act2>=act0 && act2>=act1) {
                             bestAction = 1;
                         }
                         else {
-                            chosenQ=act2;
                             bestAction = 2;
                         }
                         bw.write(i + "," + j + "," + bestAction);
